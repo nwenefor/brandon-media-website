@@ -14,9 +14,17 @@ export function SiteNav() {
     <nav className="section-shell absolute left-0 right-0 top-0 z-20 flex min-h-20 items-center justify-center gap-5 py-5">
       <a
         href="/"
-        className="min-w-0 shrink-0 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-ivory sm:max-w-56"
+        className="flex min-w-0 shrink-0 items-center gap-2 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-ivory sm:max-w-64"
         aria-label="Brandon Media Group LLC home"
       >
+        <svg
+          viewBox="294 105 52 32"
+          className="h-5 w-8 shrink-0"
+          aria-hidden="true"
+          role="img"
+        >
+          <image href="/brand/bmg_minimal_mark.svg" width="680" height="820" />
+        </svg>
         <span className="block truncate">Brandon Media Group LLC</span>
       </a>
       <div className="hidden items-center justify-center gap-4 text-center text-[0.58rem] uppercase leading-tight tracking-[0.16em] text-ivory/72 md:flex xl:gap-5 xl:text-[0.68rem]">
