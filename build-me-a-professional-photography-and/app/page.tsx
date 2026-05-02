@@ -1,6 +1,7 @@
 import { ContactForm } from "@/components/contact-form";
 import { Footer } from "@/components/footer";
 import { PortfolioFilter } from "@/components/portfolio-filter";
+import { RecentWorkGallery } from "@/components/recent-work-gallery";
 import { SiteNav } from "@/components/site-nav";
 
 const gold = "text-gold";
@@ -23,8 +24,7 @@ const whyItems = [
 const collections = [
   {
     title: "Premium",
-    price: "$2,600",
-    subtitle: "Complete Wedding Storytelling — Without Compromise",
+    subtitle: "Complete Wedding Storytelling",
     description:
       "Designed for couples who want their entire wedding captured without compromise — with nothing rushed, missed, or simplified.",
     bullets: [
@@ -40,10 +40,9 @@ const collections = [
     forLine: "For couples who want total peace of mind and a complete record of their wedding day."
   },
   {
-    badge: "MOST CHOSEN",
+    badge: "Most Chosen",
     title: "Signature",
-    price: "$1,900",
-    subtitle: "The Best Choice for Most Couples",
+    subtitle: "Most Chosen Collection",
     description:
       "Complete coverage of the moments that matter most. Most couples choose this after comparing options — it delivers everything that matters without unnecessary upgrades.",
     bullets: [
@@ -60,8 +59,7 @@ const collections = [
   },
   {
     title: "Essential",
-    price: "$1,500",
-    subtitle: "Focused Coverage for Intimate Celebrations",
+    subtitle: "Focused Wedding Coverage",
     description:
       "Ideal for smaller weddings or couples who want their most important moments captured cleanly and without unnecessary extras.",
     bullets: [
@@ -78,16 +76,16 @@ const collections = [
 ];
 
 const simpleOffers = [
-  ["Photography", "Starting at $1,050"],
-  ["Cinematic Video", "$900–$1,100"]
+  ["Photography", "Photography Only Coverage"],
+  ["Cinematic Video", "Film Only Coverage"]
 ];
 
 const addOns = [
-  ["Additional Hour of Coverage", "$150/hr"],
-  ["Full Documentary Edit", "$300"],
-  ["Social Media Highlight Clips", "$100"],
-  ["Same-Day Teaser Video", "$150"],
-  ["Raw Footage Archive", "$200"]
+  "Additional Hour of Coverage",
+  "Full Documentary Edit",
+  "Social Media Highlight Clips",
+  "Same-Day Teaser Video",
+  "Raw Footage Archive"
 ];
 
 const processSteps = [
@@ -107,6 +105,7 @@ export default function Home() {
       <Approach />
       <Collections />
       <PortfolioFilter />
+      <RecentWorkGallery />
       <Experience />
       <Contact />
       <Footer />
@@ -249,7 +248,10 @@ function Collections() {
         <h2 className="mt-4 font-serif text-4xl leading-tight text-white md:text-6xl">Wedding Collections</h2>
         <p className="mt-5 text-lg leading-8 text-ivory/70">
           Every collection is designed around coverage, clarity, and peace of mind.
-          Most couples invest between $1,500 – $2,600 depending on coverage needs.
+        </p>
+        <p className="mt-5 border-l border-gold pl-5 leading-7 text-ivory/76">
+          Full pricing and availability are shared after we confirm your date,
+          location, and coverage needs.
         </p>
       </div>
       <div className="grid gap-5 lg:grid-cols-3">
@@ -268,9 +270,8 @@ function Collections() {
               ) : null}
             </div>
             <h3 className="mt-3 font-serif text-4xl text-white">{collection.title}</h3>
-            <p className={`mt-3 text-3xl font-light ${gold}`}>{collection.price}</p>
-            <p className="mt-5 text-sm font-semibold uppercase tracking-[0.18em] text-ivory/78">
-              {collection.subtitle}
+            <p className={`mt-3 text-sm font-semibold uppercase tracking-[0.18em] ${gold}`}>
+              — {collection.subtitle}
             </p>
             <p className="mt-5 leading-7 text-ivory/66">{collection.description}</p>
             <ul className="mt-7 grid gap-3 text-sm leading-6 text-ivory/72">
@@ -283,10 +284,12 @@ function Collections() {
         ))}
       </div>
       <div className="mt-6 grid gap-4 md:grid-cols-2">
-        {simpleOffers.map(([title, price]) => (
+        {simpleOffers.map(([title, subtitle]) => (
           <div key={title} className="flex items-center justify-between gap-5 border border-white/12 bg-white/[0.025] p-5">
             <h3 className="font-serif text-2xl text-white">{title}</h3>
-            <p className={`text-right text-lg ${gold}`}>{price}</p>
+            <p className={`text-right text-sm font-semibold uppercase tracking-[0.16em] ${gold}`}>
+              — {subtitle}
+            </p>
           </div>
         ))}
       </div>
@@ -294,17 +297,20 @@ function Collections() {
         <div>
           <h3 className="font-serif text-3xl text-white">Personalize Your Coverage</h3>
           <p className="mt-4 leading-7 text-ivory/66">
-            Most couples choose one or two enhancements to personalize their coverage.
+            Enhancements can be added based on your timeline, delivery needs,
+            and the moments you want preserved.
           </p>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          {addOns.map(([name, price]) => (
+          {addOns.map((name) => (
             <div key={name} className="flex items-baseline justify-between gap-4 border-b border-white/10 pb-3">
               <p className="text-ivory/76">{name}</p>
-              <p className={`${gold}`}>{price}</p>
             </div>
           ))}
         </div>
+      </div>
+      <div className="mt-10">
+        <a className="btn-primary" href="#contact">Request Full Pricing Guide</a>
       </div>
     </section>
   );

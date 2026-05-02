@@ -47,6 +47,13 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="grid gap-4">
+      <input
+        type="text"
+        name="companyWebsite"
+        className="hidden"
+        tabIndex={-1}
+        autoComplete="off"
+      />
       <label className="grid gap-2 text-sm text-ivory/72">
         Project Type
         <select

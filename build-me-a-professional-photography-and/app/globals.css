@@ -15,6 +15,14 @@ html {
   scroll-behavior: smooth;
 }
 
+.recent-work-scroll {
+  scrollbar-width: none;
+}
+
+.recent-work-scroll::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   margin: 0;
   background:

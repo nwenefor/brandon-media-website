@@ -11,12 +11,41 @@ type ContactPayload = {
   coverageNeeded?: string;
   estimatedBudget?: string;
   message?: string;
+  organization?: string;
+  businessName?: string;
+  companyWebsite?: string;
 };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const failureMessage =
+  "We could not send your inquiry right now. Please email brandonmediagroupllc@gmail.com directly.";
+const validationMessage = "Please complete your contact information and message.";
+const successMessage = "Thank you. We will review your inquiry and follow up shortly.";
+const rateLimitMessage = "Too many requests. Please try again later.";
+const rateLimitWindowMs = 10 * 60 * 1000;
+const rateLimitMaxSubmissions = 3;
+const rateLimits = new Map<string, { count: number; resetAt: number }>();
 
 export async function POST(request: Request) {
-  const payload = (await request.json()) as ContactPayload;
+  let payload: ContactPayload;
+
+  try {
+    payload = (await request.json()) as ContactPayload;
+  } catch {
+    return NextResponse.json({ message: validationMessage }, { status: 400 });
+  }
+
+  if (stringValue(payload, "companyWebsite")) {
+    return NextResponse.json({ message: successMessage });
+  }
+
+  const ip = getClientIp(request);
+  const rateLimit = checkRateLimit(ip);
+
+  if (!rateLimit.allowed) {
+    return NextResponse.json({ message: rateLimitMessage }, { status: 429 });
+  }
+
   const projectType = payload.projectType?.trim() || "Website Inquiry";
   const name = payload.name?.trim();
   const organization = stringValue(payload, "organization");
@@ -31,31 +60,36 @@ export async function POST(request: Request) {
 
   const contactName = name || organization || businessName;
 
-  if (!contactName || !email || !message || !emailPattern.test(email)) {
-    return NextResponse.json(
-      { message: "Please complete your contact information and message." },
-      { status: 400 }
-    );
+  if (
+    !contactName ||
+    !email ||
+    !emailPattern.test(email) ||
+    !message ||
+    message.length > 2000 ||
+    (phone && phone.length > 30) ||
+    (location && location.length > 150)
+  ) {
+    return NextResponse.json({ message: validationMessage }, { status: 400 });
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL ?? "brandonmediagroupllc@gmail.com";
-  const from = process.env.CONTACT_FROM_EMAIL ?? "Brandon Media Group <onboarding@resend.dev>";
+  const from = process.env.CONTACT_FROM_EMAIL;
+  const to = process.env.CONTACT_TO_EMAIL;
 
-  if (!apiKey) {
-    return NextResponse.json(
-      { message: "We could not send your inquiry right now. Please email brandonmediagroupllc@gmail.com directly." },
-      { status: 500 }
-    );
+  if (!apiKey || !from || !to) {
+    if (!apiKey) console.error("Missing environment variable: RESEND_API_KEY");
+    if (!from) console.error("Missing environment variable: CONTACT_FROM_EMAIL");
+    if (!to) console.error("Missing environment variable: CONTACT_TO_EMAIL");
+    return NextResponse.json({ message: failureMessage }, { status: 500 });
   }
 
   const resend = new Resend(apiKey);
 
   try {
-    await resend.emails.send({
+    const emailPayload = {
       from,
       to,
-      reply_to: email,
+      replyTo: email,
       subject: `${projectType} inquiry from ${contactName}`,
       text: formatTextPayload(payload),
       html: `
@@ -65,18 +99,41 @@ export async function POST(request: Request) {
           <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
         </div>
       `
-    });
+    } as unknown as Parameters<typeof resend.emails.send>[0];
+
+    await resend.emails.send(emailPayload);
 
     return NextResponse.json({
-      message: "Thank you. We will review your date and follow up shortly."
+      message: successMessage
     });
   } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      { message: "We could not send your inquiry right now. Please email brandonmediagroupllc@gmail.com directly." },
-      { status: 502 }
-    );
+    console.error("Contact form email error:", error);
+    return NextResponse.json({ message: failureMessage }, { status: 502 });
   }
+}
+
+function getClientIp(request: Request) {
+  const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim();
+  const realIp = request.headers.get("x-real-ip")?.trim();
+
+  return forwardedFor || realIp || "unknown";
+}
+
+function checkRateLimit(ip: string) {
+  const now = Date.now();
+  const current = rateLimits.get(ip);
+
+  if (!current || current.resetAt <= now) {
+    rateLimits.set(ip, { count: 1, resetAt: now + rateLimitWindowMs });
+    return { allowed: true };
+  }
+
+  if (current.count >= rateLimitMaxSubmissions) {
+    return { allowed: false };
+  }
+
+  current.count += 1;
+  return { allowed: true };
 }
 
 function escapeHtml(value: string) {
@@ -101,7 +158,13 @@ function formatLabel(key: string) {
 
 function entries(payload: ContactPayload) {
   return Object.entries(payload)
-    .filter(([key, value]) => key !== "message" && typeof value === "string" && value.trim())
+    .filter(
+      ([key, value]) =>
+        key !== "message" &&
+        key !== "companyWebsite" &&
+        typeof value === "string" &&
+        value.trim()
+    )
     .map(([key, value]) => [formatLabel(key), String(value).trim()] as const);
 }
 
