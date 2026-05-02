@@ -92,7 +92,7 @@ function GalleryCarousel({
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
-  function scrollLeft() {
+  function scrollCarousel(direction: -1 | 1) {
     const scroller = scrollerRef.current;
 
     if (!scroller) {
@@ -100,22 +100,17 @@ function GalleryCarousel({
     }
 
     scroller.scrollBy({
-      left: -scroller.clientWidth * 0.8,
+      left: direction * scroller.clientWidth * 0.8,
       behavior: "smooth"
     });
   }
 
+  function scrollLeft() {
+    scrollCarousel(-1);
+  }
+
   function scrollRight() {
-    const scroller = scrollerRef.current;
-
-    if (!scroller) {
-      return;
-    }
-
-    scroller.scrollBy({
-      left: scroller.clientWidth * 0.8,
-      behavior: "smooth"
-    });
+    scrollCarousel(1);
   }
 
   return (
@@ -159,7 +154,7 @@ function GalleryCarousel({
           {images.map((image, index) => (
             <article
               key={image.src}
-              className="group relative h-[26rem] w-[78vw] shrink-0 snap-center overflow-hidden border border-white/10 bg-white/[0.025] sm:w-[28rem] md:h-[31rem] lg:w-[31rem]"
+              className="recent-work-slide group relative h-[26rem] w-[78vw] shrink-0 snap-start overflow-hidden border border-white/10 bg-white/[0.025] sm:w-[28rem] md:h-[31rem] lg:w-[31rem]"
             >
               <img
                 src={image.src}
