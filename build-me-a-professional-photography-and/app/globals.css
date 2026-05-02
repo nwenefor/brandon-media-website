@@ -15,22 +15,6 @@ html {
   scroll-behavior: smooth;
 }
 
-.recent-work-scroll {
-  -webkit-overflow-scrolling: touch;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-
-.recent-work-scroll::-webkit-scrollbar {
-  display: none;
-}
-
-.recent-work-slide {
-  scroll-snap-align: start;
-}
-
 body {
   margin: 0;
   background:
