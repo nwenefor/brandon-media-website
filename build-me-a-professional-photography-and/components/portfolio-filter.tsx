@@ -119,7 +119,7 @@ export function PortfolioFilter() {
                 index === 0 ? "lg:row-span-2" : ""
               }`}
             >
-              {/* TODO: Replace placeholder with real Brandon Media Group work. */}
+              {/* TODO: Replace placeholder with compressed Brandon Media Group work and WebP/AVIF versions for stronger performance. */}
               <img
                 src={item.image}
                 alt={item.alt}

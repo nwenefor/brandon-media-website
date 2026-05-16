@@ -8,9 +8,9 @@ import { SiteNav } from "@/components/site-nav";
 const gold = "text-gold";
 
 export const metadata: Metadata = {
-  title: "Wedding Photography, Videography & Event Media in Richmond and the DMV",
+  title: "Richmond & DMV Wedding Photographer, Videographer & Event Media",
   description:
-    "Brandon Media Group provides premium wedding photography, wedding videography, corporate event coverage, and real estate media in Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
+    "Brandon Media Group provides premium wedding photographer, wedding videographer, corporate event videography, and real estate media services in Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
 };
 
 const serviceAreas = [
@@ -56,9 +56,9 @@ const professionalServiceSchema = {
     name: area
   })),
   serviceType: [
-    "Wedding Photography",
-    "Wedding Videography",
-    "Corporate Event Coverage",
+    "Wedding Photographer",
+    "Wedding Videographer",
+    "Corporate Event Videography",
     "Real Estate Media"
   ],
   hasOfferCatalog: {
@@ -69,14 +69,14 @@ const professionalServiceSchema = {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Wedding Photography and Videography"
+          name: "Wedding Photographer and Wedding Videographer"
         }
       },
       {
         "@type": "Offer",
         itemOffered: {
           "@type": "Service",
-          name: "Corporate Event Photo and Video Coverage"
+          name: "Corporate Event Videography"
         }
       },
       {
@@ -192,6 +192,7 @@ export default function Home() {
       />
       <Hero />
       <Intro />
+      <ServiceAreas />
       <OtherServices />
       <Approach />
       <Collections />
@@ -211,7 +212,7 @@ function Hero() {
       <img
         className="absolute inset-0 h-full w-full object-cover"
         src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=2200&q=90"
-        alt="Luxury wedding photography and videography for Richmond VA and DMV area couples"
+        alt="Luxury wedding photographer and wedding videographer for Richmond VA and DMV area couples"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/58 to-ink/20" />
       <SiteNav />
@@ -221,7 +222,7 @@ function Hero() {
             Wedding Photography & Cinematic Films · Richmond VA to Washington DC
           </p>
           <h1 className="font-serif text-5xl font-normal leading-[0.98] tracking-normal text-white sm:text-7xl lg:text-8xl">
-            Wedding Photography & Films That Let You Relive Your Day
+            Richmond & DMV Wedding Photographer and Wedding Videographer
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-ivory/82 md:text-xl">
             Clean, natural, story-driven coverage for couples who want their
@@ -261,11 +262,50 @@ function Intro() {
   );
 }
 
+function ServiceAreas() {
+  const areaLinks = [
+    ["Weddings", "#weddings"],
+    ["Portfolio", "#portfolio"],
+    ["Corporate Events", "/corporate-events"],
+    ["Real Estate", "/real-estate-media"],
+    ["Contact", "#contact"]
+  ];
+
+  return (
+    <section className="border-y border-white/10 bg-white/[0.025] py-16 md:py-20">
+      <div className="section-shell grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <div>
+          <p className={`text-xs font-semibold uppercase tracking-[0.26em] ${gold}`}>Service Areas</p>
+          <h2 className="mt-4 font-serif text-3xl leading-tight text-white md:text-5xl">
+            Wedding, event, and real estate media across Richmond and the DMV.
+          </h2>
+        </div>
+        <div>
+          <p className="text-lg leading-8 text-ivory/72">
+            Serving Richmond, Fredericksburg, Northern Virginia, Washington DC,
+            Arlington, Alexandria, Stafford, and the DMV area.
+          </p>
+          <nav
+            aria-label="Homepage service area links"
+            className="mt-6 flex flex-wrap gap-x-5 gap-y-3 text-xs font-semibold uppercase tracking-[0.18em] text-gold"
+          >
+            {areaLinks.map(([label, href]) => (
+              <a key={href} href={href} className="transition hover:text-white">
+                {label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function OtherServices() {
   const services = [
     {
-      title: "Corporate Events",
-      copy: "Polished photo and video coverage for conferences, galas, activations, and company milestones across Richmond, Northern Virginia, and Washington DC.",
+      title: "Corporate Event Videography",
+      copy: "Polished corporate event videography and photo coverage for conferences, galas, activations, and company milestones across Richmond, Northern Virginia, and Washington DC.",
       href: "/corporate-events"
     },
     {
@@ -286,7 +326,7 @@ function OtherServices() {
         <div className="mb-8 max-w-2xl">
           <p className={`text-xs font-semibold uppercase tracking-[0.26em] ${gold}`}>More Ways We Help</p>
           <h2 className="mt-4 font-serif text-3xl leading-tight text-white md:text-5xl">
-            Additional media services, kept separate and focused.
+            Corporate Event Videography and Real Estate Media, kept separate and focused.
           </h2>
         </div>
         <div className="grid gap-4 md:grid-cols-3">
@@ -417,7 +457,7 @@ function Experience() {
         {/* TODO: Replace this placeholder with compressed Brandon Media Group wedding work and convert final delivery images to WebP/AVIF where possible. */}
         <img
           src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=88"
-          alt="Natural wedding photography for couples in Northern Virginia and Washington DC"
+          alt="Natural wedding photographer and wedding videographer for Northern Virginia and Washington DC"
           className="aspect-[4/5] w-full object-cover"
         />
       </div>
