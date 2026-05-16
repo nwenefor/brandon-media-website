@@ -212,22 +212,22 @@ function Hero() {
       <img
         className="absolute inset-0 h-full w-full object-cover"
         src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=2200&q=90"
-        alt="Luxury wedding photographer and wedding videographer for Richmond VA and DMV area couples"
+        alt="Luxury wedding photographer and wedding videographer for Alexandria VA and DMV area couples"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/58 to-ink/20" />
       <SiteNav />
       <div className="section-shell relative z-10 w-full pb-14 pt-28 md:pb-20">
         <div className="max-w-4xl">
           <p className={`mb-5 text-xs font-semibold uppercase tracking-[0.26em] ${gold}`}>
-            Wedding Photography & Cinematic Films · Richmond VA to Washington DC
+            Wedding Photography & Cinematic Films · Alexandria VA to Washington DC
           </p>
           <h1 className="font-serif text-5xl font-normal leading-[0.98] tracking-normal text-white sm:text-7xl lg:text-8xl">
-            Richmond & DMV Wedding Photographer and Wedding Videographer
+            Alexandria & DMV Wedding Photographer and Wedding Videographer
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-ivory/82 md:text-xl">
             Clean, natural, story-driven coverage for couples who want their
-            wedding captured properly across Richmond, Fredericksburg, Northern
-            Virginia, Washington DC, and the DMV area.
+            wedding captured properly across Alexandria, Northern Virginia,
+            Washington DC, Fredericksburg, and the DMV area.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a className="btn-primary" href="#contact">Check Availability</a>
