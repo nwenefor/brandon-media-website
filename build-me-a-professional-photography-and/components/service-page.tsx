@@ -41,10 +41,18 @@ export function ServicePage({
   projectType,
   formFields
 }: ServicePageProps) {
+  const relatedLinks = [
+    ["Weddings", "/#weddings"],
+    ["Portfolio", "/#portfolio"],
+    ["Corporate Events", "/corporate-events"],
+    ["Real Estate", "/real-estate-media"],
+    ["Contact", "/#contact"]
+  ];
+
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-ivory">
       <section className="relative flex min-h-[86vh] items-end overflow-hidden">
-        {/* TODO: Replace placeholder with real Brandon Media Group service work. */}
+        {/* TODO: Replace placeholder with compressed Brandon Media Group service work and provide WebP/AVIF versions for stronger performance. */}
         <img className="absolute inset-0 h-full w-full object-cover" src={heroImage} alt={heroAlt} />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/62 to-ink/20" />
         <SiteNav />
@@ -67,6 +75,16 @@ export function ServicePage({
         <p className="max-w-4xl font-serif text-3xl leading-tight text-white md:text-5xl">
           {positioning}
         </p>
+        <nav
+          aria-label="Related service links"
+          className="mt-8 flex flex-wrap gap-x-5 gap-y-3 text-xs font-semibold uppercase tracking-[0.18em] text-gold"
+        >
+          {relatedLinks.map(([label, href]) => (
+            <a key={href} href={href} className="transition hover:text-white">
+              {label}
+            </a>
+          ))}
+        </nav>
       </section>
 
       <section className="border-y border-white/10 bg-white/[0.03] py-20 md:py-28">
@@ -96,6 +114,10 @@ export function ServicePage({
             <p className="text-xs font-semibold uppercase tracking-[0.26em] text-gold">Inquiry</p>
             <h2 className="mt-4 font-serif text-4xl leading-tight text-white md:text-6xl">{ctaTitle}</h2>
             <p className="mt-6 max-w-lg text-lg leading-8 text-ivory/70">{ctaCopy}</p>
+            <p className="mt-6 max-w-lg border-l border-gold pl-5 leading-7 text-ivory/76">
+              Serving Richmond, Fredericksburg, Northern Virginia, Washington DC,
+              Arlington, Alexandria, Stafford, and the DMV area.
+            </p>
           </div>
           <div className="border border-white/12 bg-ink p-5 md:p-8">
             <ServiceInquiryForm

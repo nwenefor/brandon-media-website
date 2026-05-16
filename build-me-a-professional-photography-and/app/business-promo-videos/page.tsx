@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
 
 export const metadata: Metadata = {
-  title: "Business Promo Videos | Brandon Media Group LLC",
+  title: "Business Promo Videos in Richmond and the DMV",
   description:
-    "Clean, story-driven promotional videos for local businesses, service providers, restaurants, salons, gyms, clinics, creators, and brands."
+    "Clean, story-driven promotional videos for local businesses, service providers, restaurants, salons, gyms, clinics, creators, and brands in Richmond, Fredericksburg, Northern Virginia, Washington DC, and the DMV area."
 };
 
 const formFields = [
@@ -37,13 +37,13 @@ export default function BusinessPromoVideosPage() {
     <ServicePage
       eyebrow="Business Promo Videos · DMV Area"
       headline="Promo Videos for Local Businesses That Need Better Content and More Trust"
-      subheadline="Clean, story-driven video content for local businesses, service providers, restaurants, salons, gyms, clinics, creators, and brands."
+      subheadline="Clean, story-driven video content for local businesses, service providers, restaurants, salons, gyms, clinics, creators, and brands in Richmond, Northern Virginia, Washington DC, and the DMV area."
       primaryCta="Start a Promo Project"
       secondaryCta="View Business Work"
       secondaryCtaHref="/?portfolio=Business%20Promos#portfolio"
       heroImage="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=2200&q=90"
-      heroAlt="Local business owner reviewing promotional content"
-      positioning="Your business does not need random clips. It needs content that explains what you do, builds trust, and gives people a reason to choose you. We create clean promotional videos that help local businesses look more credible and connect with customers."
+      heroAlt="Business promo video production for local brands in Richmond VA and the DMV area"
+      positioning="Your business does not need random clips. It needs content that explains what you do, builds trust, and gives people a reason to choose you. We create clean promotional videos that help local businesses across Richmond, Northern Virginia, Washington DC, and the DMV area look more credible and connect with customers."
       captureTitle="Video Types"
       captureItems={[
         "Brand Story Video",

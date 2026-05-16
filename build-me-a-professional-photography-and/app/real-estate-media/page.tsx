@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
 
 export const metadata: Metadata = {
-  title: "Real Estate Photo & Video | Brandon Media Group LLC",
+  title: "Real Estate Photography & Video in Richmond and the DMV",
   description:
-    "Clean real estate photography, walkthrough videos, and social media tours for listings, rentals, and properties across the DMV area."
+    "Clean real estate photography, walkthrough videos, and social media tours for listings, rentals, and properties in Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
 };
 
 const formFields = [
@@ -36,13 +36,13 @@ export default function RealEstateMediaPage() {
     <ServicePage
       eyebrow="Real Estate Media · DMV Area"
       headline="Clean Real Estate Photo & Video for Listings That Need to Stand Out"
-      subheadline="Professional real estate visuals for agents, property managers, builders, and short-term rental hosts across the DMV area."
+      subheadline="Professional real estate visuals for agents, property managers, builders, and short-term rental hosts across Richmond, Fredericksburg, Stafford, Northern Virginia, Arlington, Alexandria, Washington DC, and the DMV area."
       primaryCta="Book Real Estate Media"
       secondaryCta="View Property Work"
       secondaryCtaHref="/?portfolio=Real%20Estate#portfolio"
       heroImage="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2200&q=90"
-      heroAlt="Bright luxury residential listing interior"
-      positioning="Buyers judge a property before they ever step inside. Clean visuals help listings feel brighter, more polished, and more trustworthy. Brandon Media Group creates photo and video content designed to help properties present at their best."
+      heroAlt="Real estate photography and walkthrough video for Richmond VA and DMV area listings"
+      positioning="Buyers judge a property before they ever step inside. Clean visuals help listings feel brighter, more polished, and more trustworthy. Brandon Media Group creates photo and video content designed to help properties present at their best across Richmond, Fredericksburg, Stafford, Northern Virginia, Arlington, Alexandria, Washington DC, and the DMV area."
       captureTitle="Services"
       captureItems={[
         "Listing Photography",

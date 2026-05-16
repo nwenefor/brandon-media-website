@@ -3,9 +3,9 @@ import { Footer } from "@/components/footer";
 import { SiteNav } from "@/components/site-nav";
 
 export const metadata: Metadata = {
-  title: "About Brandon Media Group LLC | Photo & Video Studio",
+  title: "About Our Richmond & DMV Photo Video Studio",
   description:
-    "A calm, professional photo and video studio serving weddings, corporate events, real estate, and local businesses across Washington DC, Maryland, and Virginia."
+    "A calm, professional photo and video studio serving weddings, corporate events, real estate, and local businesses across Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
 };
 
 const differentiators = [
@@ -36,25 +36,25 @@ const trustItems = [
   "Timeline planning",
   "Clear communication",
   "Private online delivery galleries",
-  "DMV area coverage"
+  "Richmond and DMV area coverage"
 ];
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-ivory">
       <section className="relative flex min-h-[84vh] items-end overflow-hidden">
-        {/* TODO: Replace with a real Brandon Media Group founder or behind-the-scenes image. */}
+        {/* TODO: Replace with a real Brandon Media Group founder or behind-the-scenes image, compressed and exported as WebP/AVIF for stronger performance. */}
         <img
           className="absolute inset-0 h-full w-full object-cover"
           src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2200&q=90"
-          alt="Professional camera setup during a production"
+          alt="Brandon Media Group professional photo and video production for Richmond VA and the DMV area"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/66 to-ink/24" />
         <SiteNav />
         <div className="section-shell relative z-10 w-full pb-14 pt-32 md:pb-20">
           <div className="max-w-5xl">
             <p className="mb-5 text-xs font-semibold uppercase tracking-[0.26em] text-gold">
-              Brandon Media Group LLC · DMV Area
+              Brandon Media Group LLC · Richmond VA & DMV Area
             </p>
             <h1 className="font-serif text-5xl font-normal leading-[0.98] tracking-normal text-white sm:text-7xl">
               A calm, professional eye behind the moments that matter.
@@ -62,7 +62,8 @@ export default function AboutPage() {
             <p className="mt-7 max-w-3xl text-lg leading-8 text-ivory/82 md:text-xl">
               Brandon Media Group LLC creates clean, natural, story-driven
               photography and films for couples, events, properties, and
-              businesses across Washington DC, Maryland, and Virginia.
+              businesses across Richmond, Fredericksburg, Stafford, Northern
+              Virginia, Arlington, Alexandria, Washington DC, and the DMV area.
             </p>
             <div className="mt-9">
               <a className="btn-primary" href="/#contact">Check Availability</a>
@@ -83,8 +84,10 @@ export default function AboutPage() {
           visuals. The goal is to provide a smooth, professional experience from
           first conversation to final delivery. Whether documenting a wedding day,
           covering a corporate event, filming a property, or creating content for
-          a local business, the focus remains the same: clean imagery, thoughtful
-          storytelling, and dependable service.
+          a local business in Richmond, Fredericksburg, Northern Virginia,
+          Washington DC, Arlington, Alexandria, Stafford, or the broader DMV area,
+          the focus remains the same: clean imagery, thoughtful storytelling,
+          and dependable service.
         </p>
       </section>
 
@@ -157,7 +160,9 @@ export default function AboutPage() {
         </h2>
         <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-ivory/70">
           Share your date, location, and the type of coverage you need. If the
-          date is available, we will follow up with the best next steps.
+          date is available, we will follow up with the best next steps for your
+          wedding, event, property, or brand project in Richmond, Northern
+          Virginia, Washington DC, or the DMV area.
         </p>
         <div className="mt-9">
           <a className="btn-primary" href="/#contact">Start an Inquiry</a>

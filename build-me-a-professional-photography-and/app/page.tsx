@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ContactForm } from "@/components/contact-form";
 import { Footer } from "@/components/footer";
 import { PortfolioFilter } from "@/components/portfolio-filter";
@@ -5,6 +6,89 @@ import { RecentWorkGallery } from "@/components/recent-work-gallery";
 import { SiteNav } from "@/components/site-nav";
 
 const gold = "text-gold";
+
+export const metadata: Metadata = {
+  title: "Wedding Photography, Videography & Event Media in Richmond and the DMV",
+  description:
+    "Brandon Media Group provides premium wedding photography, wedding videography, corporate event coverage, and real estate media in Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
+};
+
+const serviceAreas = [
+  "Richmond VA",
+  "Fredericksburg VA",
+  "Northern Virginia",
+  "Washington DC",
+  "Arlington VA",
+  "Alexandria VA",
+  "Stafford VA",
+  "the DMV area"
+];
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "@id": "https://brandonmediagroupllc.com/#localbusiness",
+  name: "Brandon Media Group LLC",
+  image: "https://brandonmediagroupllc.com/brand/bmg_minimal_mark.svg",
+  url: "https://brandonmediagroupllc.com/",
+  telephone: "+1-540-214-7725",
+  email: "brandonmediagroupllc@gmail.com",
+  priceRange: "$$",
+  areaServed: serviceAreas.map((area) => ({
+    "@type": "Place",
+    name: area
+  })),
+  description:
+    "Premium wedding photography, wedding videography, corporate event coverage, and real estate media for Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area.",
+  sameAs: ["https://www.instagram.com/brandonmediagroup/"]
+};
+
+const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": "https://brandonmediagroupllc.com/#professionalservice",
+  name: "Brandon Media Group LLC",
+  url: "https://brandonmediagroupllc.com/",
+  telephone: "+1-540-214-7725",
+  email: "brandonmediagroupllc@gmail.com",
+  areaServed: serviceAreas.map((area) => ({
+    "@type": "Place",
+    name: area
+  })),
+  serviceType: [
+    "Wedding Photography",
+    "Wedding Videography",
+    "Corporate Event Coverage",
+    "Real Estate Media"
+  ],
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Photography and Video Services",
+    itemListElement: [
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Wedding Photography and Videography"
+        }
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Corporate Event Photo and Video Coverage"
+        }
+      },
+      {
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: "Real Estate Photography and Video"
+        }
+      }
+    ]
+  }
+};
 
 const whyItems = [
   {
@@ -99,6 +183,13 @@ const processSteps = [
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-ivory">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([localBusinessSchema, professionalServiceSchema])
+        }}
+      />
       <Hero />
       <Intro />
       <OtherServices />
@@ -116,25 +207,26 @@ export default function Home() {
 function Hero() {
   return (
     <section id="weddings" className="relative flex min-h-screen items-end overflow-hidden">
-      {/* TODO: Replace this placeholder wedding image with real Brandon Media Group work. */}
+      {/* TODO: Replace this placeholder with compressed Brandon Media Group wedding work and provide WebP/AVIF versions for faster local SEO performance. */}
       <img
         className="absolute inset-0 h-full w-full object-cover"
         src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=2200&q=90"
-        alt="Elegant wedding ceremony with a couple at the altar"
+        alt="Luxury wedding photography and videography for Richmond VA and DMV area couples"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/58 to-ink/20" />
       <SiteNav />
       <div className="section-shell relative z-10 w-full pb-14 pt-28 md:pb-20">
         <div className="max-w-4xl">
           <p className={`mb-5 text-xs font-semibold uppercase tracking-[0.26em] ${gold}`}>
-            Wedding Photography & Cinematic Films · DMV Area
+            Wedding Photography & Cinematic Films · Richmond VA to Washington DC
           </p>
           <h1 className="font-serif text-5xl font-normal leading-[0.98] tracking-normal text-white sm:text-7xl lg:text-8xl">
             Wedding Photography & Films That Let You Relive Your Day
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-ivory/82 md:text-xl">
             Clean, natural, story-driven coverage for couples who want their
-            wedding captured properly — without shortcuts.
+            wedding captured properly across Richmond, Fredericksburg, Northern
+            Virginia, Washington DC, and the DMV area.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a className="btn-primary" href="#contact">Check Availability</a>
@@ -160,7 +252,9 @@ function Intro() {
         <p className="mx-auto mt-7 max-w-3xl text-lg leading-8 text-ivory/70">
           At Brandon Media Group, we capture weddings through a refined blend of
           photography and cinematic storytelling. Our approach is personal,
-          intentional, and focused on preserving the moments that matter most.
+          intentional, and focused on preserving the moments that matter most for
+          clients in Richmond, Fredericksburg, Stafford, Arlington, Alexandria,
+          Washington DC, Northern Virginia, and throughout the DMV area.
         </p>
       </div>
     </section>
@@ -171,12 +265,12 @@ function OtherServices() {
   const services = [
     {
       title: "Corporate Events",
-      copy: "Polished photo and video coverage for conferences, galas, activations, and company milestones.",
+      copy: "Polished photo and video coverage for conferences, galas, activations, and company milestones across Richmond, Northern Virginia, and Washington DC.",
       href: "/corporate-events"
     },
     {
       title: "Real Estate Media",
-      copy: "Clean listing visuals, walkthrough videos, and social tours for properties that need to stand out.",
+      copy: "Clean listing visuals, walkthrough videos, and social tours for properties in Richmond, Fredericksburg, Stafford, Arlington, Alexandria, and the DMV area.",
       href: "/real-estate-media"
     },
     {
@@ -320,10 +414,10 @@ function Experience() {
   return (
     <section id="experience" className="section-shell grid gap-12 py-20 md:grid-cols-[0.9fr_1.1fr] md:items-center md:py-28">
       <div>
-        {/* TODO: Replace this placeholder wedding image with real Brandon Media Group work. */}
+        {/* TODO: Replace this placeholder with compressed Brandon Media Group wedding work and convert final delivery images to WebP/AVIF where possible. */}
         <img
           src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=88"
-          alt="Newly married couple walking together"
+          alt="Natural wedding photography for couples in Northern Virginia and Washington DC"
           className="aspect-[4/5] w-full object-cover"
         />
       </div>
@@ -334,9 +428,11 @@ function Experience() {
         </h2>
         <p className="mt-6 text-lg leading-8 text-ivory/70">
           Brandon Media Group is a wedding photography and film studio serving
-          couples across Washington DC, Maryland, and Virginia. The work is clean,
-          natural, and story-driven, with a focus on real emotion, professional
-          audio, and a calm experience from first conversation to final delivery.
+          couples across Richmond, Fredericksburg, Stafford, Northern Virginia,
+          Arlington, Alexandria, Washington DC, and the DMV area. The work is
+          clean, natural, and story-driven, with a focus on real emotion,
+          professional audio, and a calm experience from first conversation to
+          final delivery.
         </p>
         <ol className="mt-8 grid gap-4">
           {processSteps.map((step, index) => (
@@ -363,7 +459,8 @@ function Contact() {
           <h2 className="mt-4 font-serif text-4xl leading-tight text-white md:text-6xl">Check Availability</h2>
           <p className="mt-6 max-w-lg text-lg leading-8 text-ivory/70">
             Share your wedding date, location, and the type of coverage you are considering.
-            If your date is available, we will follow up with the best collection for your day.
+            We regularly support inquiries from Richmond, Fredericksburg, Stafford,
+            Northern Virginia, Arlington, Alexandria, Washington DC, and the DMV area.
           </p>
           <p className="mt-6 max-w-lg border-l border-gold pl-5 leading-7 text-ivory/76">
             We take a limited number of weddings each month to maintain quality.
@@ -375,7 +472,14 @@ function Contact() {
             </a>
             <a className="transition hover:text-white" href="tel:5402147725">540-214-7725</a>
             <p>@brandonmediagroup</p>
-            <p>Serving Washington DC · Maryland · Virginia</p>
+            <p>Serving Richmond · Fredericksburg · Northern Virginia · Washington DC · Arlington · Alexandria · Stafford · DMV area</p>
+            <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2 text-[0.68rem]">
+              <a className="transition hover:text-white" href="#weddings">Weddings</a>
+              <a className="transition hover:text-white" href="#portfolio">Portfolio</a>
+              <a className="transition hover:text-white" href="/corporate-events">Corporate Events</a>
+              <a className="transition hover:text-white" href="/real-estate-media">Real Estate</a>
+              <a className="transition hover:text-white" href="#contact">Contact</a>
+            </div>
           </div>
         </div>
         <div className="border border-white/12 bg-ink p-5 md:p-8">
