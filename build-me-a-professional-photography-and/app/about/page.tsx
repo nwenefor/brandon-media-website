@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Footer } from "@/components/footer";
 import { SiteNav } from "@/components/site-nav";
+import { createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "About Our Richmond & DMV Photo Video Studio",
-  description:
-    "A calm, professional photo and video studio serving weddings, corporate events, real estate, and local businesses across Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
-};
+export const metadata: Metadata = createMetadata({
+  title: "About Brandon Media Group | Virginia Photo & Video Studio",
+  description: "Meet Brandon Media Group, a calm, professional photography and video studio serving weddings, events, properties, and businesses across Virginia and the DMV.",
+  path: "/about"
+});
 
 const differentiators = [
   {
@@ -24,7 +26,7 @@ const differentiators = [
 ];
 
 const services = [
-  ["Wedding Photography & Films", "/#weddings"],
+  ["Wedding Photography & Films", "/wedding-photo-video"],
   ["Corporate Event Coverage", "/corporate-events"],
   ["Real Estate Media", "/real-estate-media"],
   ["Business Promo Videos", "/business-promo-videos"]
@@ -43,11 +45,15 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-ivory">
       <section className="relative flex min-h-[84vh] items-end overflow-hidden">
-        {/* TODO: Replace with a real Brandon Media Group founder or behind-the-scenes image, compressed and exported as WebP/AVIF for stronger performance. */}
-        <img
-          className="absolute inset-0 h-full w-full object-cover"
+        {/* CONTENT TODO: Replace this stock image with an approved Brandon Media Group portrait or behind-the-scenes photograph. */}
+        <Image
+          fill
+          priority
+          quality={84}
+          sizes="100vw"
+          className="object-cover"
           src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=2200&q=90"
-          alt="Brandon Media Group professional photo and video production for Richmond VA and the DMV area"
+          alt="Professional camera operator used as a temporary studio image"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/66 to-ink/24" />
         <SiteNav />

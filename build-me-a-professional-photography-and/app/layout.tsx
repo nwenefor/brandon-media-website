@@ -1,13 +1,25 @@
 import type { Metadata } from "next";
+import { AnalyticsProvider } from "@/components/analytics-provider";
+import { JsonLd } from "@/components/json-ld";
+import { business, organizationSchema, siteUrl } from "@/lib/site";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  applicationName: business.displayName,
   title: {
-    default: "Brandon Media Group LLC | DMV Photo & Video Studio",
-    template: "%s | Brandon Media Group LLC"
+    default: "Brandon Media Group | Virginia Wedding Photographer & Videographer",
+    template: `%s | ${business.displayName}`
   },
   description:
-    "Premium wedding photography, wedding videography, corporate event coverage, and real estate media for Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
+    "Professional wedding photography and cinematic wedding videography for couples across Virginia, Northern Virginia, Alexandria, Washington, DC, and the DMV.",
+  robots: {
+    index: true,
+    follow: true
+  },
+  icons: {
+    icon: business.logo
+  }
 };
 
 export default function RootLayout({
@@ -17,7 +29,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans antialiased">{children}</body>
+      <body className="font-sans antialiased">
+        <AnalyticsProvider />
+        <JsonLd data={organizationSchema} />
+        {children}
+      </body>
     </html>
   );
 }

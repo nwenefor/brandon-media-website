@@ -1,73 +1,70 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 
 const categories = ["Weddings", "Corporate Events", "Real Estate", "Business Promos"];
 
 const items = [
-  // Production images should be compressed and converted to WebP/AVIF where possible to improve Core Web Vitals and local SEO.
   {
     category: "Weddings",
-    label: "Ceremony",
-    image:
-      "https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=88",
-    alt: "Wedding ceremony photography and videography for Richmond VA and DMV area couples"
+    label: "Couple Portrait",
+    image: "/portfolio/recent-work/weddings/_DSC7381.jpg",
+    alt: "Wedding couple sharing a kiss during outdoor portraits"
   },
   {
     category: "Weddings",
-    label: "Vows",
-    image:
-      "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1400&q=88",
-    alt: "Wedding vow film coverage for Fredericksburg and Northern Virginia celebrations"
+    label: "Getting Ready",
+    image: "/portfolio/recent-work/weddings/_DSC7106.jpg",
+    alt: "Groom adjusting his wedding attire while getting ready"
   },
   {
     category: "Weddings",
     label: "Couple Portraits",
-    image:
-      "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=88",
-    alt: "Natural wedding portraits for Arlington Alexandria and Washington DC couples"
+    image: "/portfolio/recent-work/weddings/_DSC7179.jpg",
+    alt: "Bride holding a white bouquet during a wedding portrait"
   },
   {
     category: "Corporate Events",
     label: "Speaker Coverage",
     image:
       "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?auto=format&fit=crop&w=1400&q=88",
-    alt: "Corporate event speaker photo and video coverage in Washington DC and Northern Virginia"
+    alt: "Conference speaker addressing an audience from a stage"
   },
   {
     category: "Corporate Events",
     label: "Gala Highlights",
     image:
       "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&fit=crop&w=1400&q=88",
-    alt: "Corporate gala photography and event recap video for Richmond and the DMV area"
+    alt: "Guests gathered at a formal indoor event"
   },
   {
     category: "Real Estate",
     label: "Listing Photography",
     image:
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=88",
-    alt: "Real estate listing photography for Richmond Fredericksburg and Stafford VA properties"
+    alt: "Bright modern living room used to preview real estate photography"
   },
   {
     category: "Real Estate",
     label: "Property Walkthrough",
     image:
       "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=88",
-    alt: "Real estate walkthrough video for Arlington Alexandria and Washington DC listings"
+    alt: "Modern home interior used to preview property walkthrough video"
   },
   {
     category: "Business Promos",
     label: "Brand Story",
     image:
       "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1400&q=88",
-    alt: "Business promo video production for local Richmond and DMV area brands"
+    alt: "Business team collaborating around a table"
   },
   {
     category: "Business Promos",
     label: "Social Content",
     image:
       "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1400&q=88",
-    alt: "Social media video content for Northern Virginia and Washington DC businesses"
+    alt: "Creative business team in a bright office setting"
   }
 ];
 
@@ -119,8 +116,10 @@ export function PortfolioFilter() {
                 index === 0 ? "lg:row-span-2" : ""
               }`}
             >
-              {/* TODO: Replace placeholder with compressed Brandon Media Group work and WebP/AVIF versions for stronger performance. */}
-              <img
+              <Image
+                fill
+                quality={82}
+                sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                 src={item.image}
                 alt={item.alt}
                 className="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]"

@@ -11,8 +11,22 @@
   box-sizing: border-box;
 }
 
+a,
+button,
+summary,
+input,
+select,
+textarea {
+  outline-offset: 4px;
+}
+
+:focus-visible {
+  outline: 2px solid #c8a96a;
+}
+
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
 }
 
 body {
@@ -21,6 +35,20 @@ body {
     radial-gradient(circle at top left, rgba(200, 169, 106, 0.08), transparent 32rem),
     linear-gradient(180deg, #06070a 0%, #0d0c0a 48%, #06070a 100%);
   color: #f7f1e7;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 ::selection {
@@ -93,5 +121,48 @@ body {
   .btn-secondary:hover {
     border-color: #c8a96a;
     color: #c8a96a;
+  }
+
+  .btn-dark {
+    align-items: center;
+    background: #06070a;
+    border: 1px solid #06070a;
+    color: #f7f1e7;
+    display: inline-flex;
+    font-size: 0.75rem;
+    font-weight: 700;
+    height: 3rem;
+    justify-content: center;
+    letter-spacing: 0.18em;
+    padding-inline: 1.25rem;
+    text-transform: uppercase;
+    transition: background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+  }
+
+  .btn-dark:hover {
+    background: #c8a96a;
+    border-color: #c8a96a;
+    color: #06070a;
+  }
+
+  .btn-dark-outline {
+    align-items: center;
+    background: transparent;
+    border: 1px solid rgba(6, 7, 10, 0.3);
+    color: #06070a;
+    display: inline-flex;
+    font-size: 0.75rem;
+    font-weight: 700;
+    height: 3rem;
+    justify-content: center;
+    letter-spacing: 0.18em;
+    padding-inline: 1.25rem;
+    text-transform: uppercase;
+    transition: border-color 180ms ease, color 180ms ease;
+  }
+
+  .btn-dark-outline:hover {
+    border-color: #8c713e;
+    color: #6f5527;
   }
 }

@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
+import { createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Corporate Event Photo & Video Coverage in Richmond and the DMV",
-  description:
-    "Polished corporate event photo and video coverage for conferences, galas, brand activations, and company events in Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
-};
+export const metadata: Metadata = createMetadata({
+  title: "Corporate Event Photo & Video | Virginia & DMV",
+  description: "Polished corporate event photography and video for conferences, galas, activations, and company events across Virginia, Washington, DC, and the DMV.",
+  path: "/corporate-events"
+});
 
 const formFields = [
   { type: "text", name: "organization", label: "Company / Organization Name", required: true },

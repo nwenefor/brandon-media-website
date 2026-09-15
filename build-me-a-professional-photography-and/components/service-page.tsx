@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Footer } from "@/components/footer";
 import { Field, ServiceInquiryForm } from "@/components/service-inquiry-form";
 import { SiteNav } from "@/components/site-nav";
@@ -42,7 +43,7 @@ export function ServicePage({
   formFields
 }: ServicePageProps) {
   const relatedLinks = [
-    ["Weddings", "/#weddings"],
+    ["Wedding Photo + Video", "/wedding-photo-video"],
     ["Portfolio", "/#portfolio"],
     ["Corporate Events", "/corporate-events"],
     ["Real Estate", "/real-estate-media"],
@@ -52,8 +53,7 @@ export function ServicePage({
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-ivory">
       <section className="relative flex min-h-[86vh] items-end overflow-hidden">
-        {/* TODO: Replace placeholder with compressed Brandon Media Group service work and provide WebP/AVIF versions for stronger performance. */}
-        <img className="absolute inset-0 h-full w-full object-cover" src={heroImage} alt={heroAlt} />
+        <Image fill priority quality={84} sizes="100vw" className="object-cover" src={heroImage} alt={heroAlt} />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/62 to-ink/20" />
         <SiteNav />
         <div className="section-shell relative z-10 w-full pb-14 pt-32 md:pb-20">

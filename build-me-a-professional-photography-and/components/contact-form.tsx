@@ -10,6 +10,7 @@ export function ContactForm() {
   const [projectType, setProjectType] = useState("Wedding");
 
   const serviceLinks: Record<string, string> = {
+    "Wedding": "/wedding-photo-video#inquiry",
     "Corporate Event": "/corporate-events#inquiry",
     "Real Estate": "/real-estate-media#inquiry",
     "Business Promo": "/business-promo-videos#inquiry"

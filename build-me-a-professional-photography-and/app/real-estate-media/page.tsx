@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
+import { createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Real Estate Photography & Video in Richmond and the DMV",
-  description:
-    "Clean real estate photography, walkthrough videos, and social media tours for listings, rentals, and properties in Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
-};
+export const metadata: Metadata = createMetadata({
+  title: "Real Estate Photography & Video | Virginia & DMV",
+  description: "Clean real estate photography, walkthrough videos, and social tours for listings, rentals, and properties across Virginia, Washington, DC, and the DMV.",
+  path: "/real-estate-media"
+});
 
 const formFields = [
   { type: "text", name: "name", label: "Name", placeholder: "Full name", required: true },

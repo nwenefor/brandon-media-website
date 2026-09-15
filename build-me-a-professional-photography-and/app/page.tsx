@@ -1,94 +1,19 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ContactForm } from "@/components/contact-form";
 import { Footer } from "@/components/footer";
 import { PortfolioFilter } from "@/components/portfolio-filter";
 import { RecentWorkGallery } from "@/components/recent-work-gallery";
 import { SiteNav } from "@/components/site-nav";
+import { createMetadata } from "@/lib/seo";
 
 const gold = "text-gold";
 
-export const metadata: Metadata = {
-  title: "Richmond & DMV Wedding Photographer, Videographer & Event Media",
-  description:
-    "Brandon Media Group provides premium wedding photographer, wedding videographer, corporate event videography, and real estate media services in Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area."
-};
-
-const serviceAreas = [
-  "Richmond VA",
-  "Fredericksburg VA",
-  "Northern Virginia",
-  "Washington DC",
-  "Arlington VA",
-  "Alexandria VA",
-  "Stafford VA",
-  "the DMV area"
-];
-
-const localBusinessSchema = {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "@id": "https://brandonmediagroupllc.com/#localbusiness",
-  name: "Brandon Media Group LLC",
-  image: "https://brandonmediagroupllc.com/brand/bmg_minimal_mark.svg",
-  url: "https://brandonmediagroupllc.com/",
-  telephone: "+1-540-214-7725",
-  email: "brandonmediagroupllc@gmail.com",
-  priceRange: "$$",
-  areaServed: serviceAreas.map((area) => ({
-    "@type": "Place",
-    name: area
-  })),
-  description:
-    "Premium wedding photography, wedding videography, corporate event coverage, and real estate media for Richmond, Fredericksburg, Northern Virginia, Washington DC, Arlington, Alexandria, Stafford, and the DMV area.",
-  sameAs: ["https://www.instagram.com/brandonmediagroup/"]
-};
-
-const professionalServiceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": "https://brandonmediagroupllc.com/#professionalservice",
-  name: "Brandon Media Group LLC",
-  url: "https://brandonmediagroupllc.com/",
-  telephone: "+1-540-214-7725",
-  email: "brandonmediagroupllc@gmail.com",
-  areaServed: serviceAreas.map((area) => ({
-    "@type": "Place",
-    name: area
-  })),
-  serviceType: [
-    "Wedding Photographer",
-    "Wedding Videographer",
-    "Corporate Event Videography",
-    "Real Estate Media"
-  ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Photography and Video Services",
-    itemListElement: [
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Wedding Photographer and Wedding Videographer"
-        }
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Corporate Event Videography"
-        }
-      },
-      {
-        "@type": "Offer",
-        itemOffered: {
-          "@type": "Service",
-          name: "Real Estate Photography and Video"
-        }
-      }
-    ]
-  }
-};
+export const metadata: Metadata = createMetadata({
+  title: "Brandon Media Group | Virginia Wedding Photographer & Videographer",
+  description: "Professional wedding photography and cinematic videography for couples across Virginia, Alexandria, Northern Virginia, Washington, DC, and the DMV.",
+  path: "/"
+});
 
 const whyItems = [
   {
@@ -176,22 +101,16 @@ const processSteps = [
   "Reach out to confirm your date",
   "Select your collection",
   "Review and sign your service agreement",
-  "Pay a 25% retainer to secure your date",
-  "Final balance due on or before the wedding day"
+  "Sign your agreement and pay a 30% non-refundable retainer",
+  "Pay the remaining balance 14 days before the wedding"
 ];
 
 export default function Home() {
   return (
     <main className="min-h-screen overflow-hidden bg-ink text-ivory">
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify([localBusinessSchema, professionalServiceSchema])
-        }}
-      />
       <Hero />
       <Intro />
+      <WeddingServices />
       <ServiceAreas />
       <OtherServices />
       <Approach />
@@ -208,26 +127,28 @@ export default function Home() {
 function Hero() {
   return (
     <section id="weddings" className="relative flex min-h-screen items-end overflow-hidden">
-      {/* TODO: Replace this placeholder with compressed Brandon Media Group wedding work and provide WebP/AVIF versions for faster local SEO performance. */}
-      <img
-        className="absolute inset-0 h-full w-full object-cover"
-        src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=2200&q=90"
-        alt="Luxury wedding photographer and wedding videographer for Alexandria VA and DMV area couples"
+      <Image
+        fill
+        priority
+        quality={86}
+        sizes="100vw"
+        className="object-cover object-center"
+        src="/portfolio/recent-work/weddings/_DSC7381.jpg"
+        alt="Newly married couple sharing a kiss during outdoor wedding portraits"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/58 to-ink/20" />
       <SiteNav />
       <div className="section-shell relative z-10 w-full pb-14 pt-28 md:pb-20">
         <div className="max-w-4xl">
           <p className={`mb-5 text-xs font-semibold uppercase tracking-[0.26em] ${gold}`}>
-            Wedding Photography & Cinematic Films · Alexandria VA to Washington DC
+            Wedding Photography & Cinematic Films · Virginia & the DMV
           </p>
           <h1 className="font-serif text-5xl font-normal leading-[0.98] tracking-normal text-white sm:text-7xl lg:text-8xl">
-            Alexandria & DMV Wedding Photographer and Wedding Videographer
+            Virginia Wedding Photography & Cinematic Films
           </h1>
           <p className="mt-7 max-w-2xl text-lg leading-8 text-ivory/82 md:text-xl">
-            Clean, natural, story-driven coverage for couples who want their
-            wedding captured properly across Alexandria, Northern Virginia,
-            Washington DC, Fredericksburg, and the DMV area.
+            Clean, natural, story-driven coverage for couples who want their wedding
+            preserved in photographs, film, or one coordinated collection.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
             <a className="btn-primary" href="#contact">Check Availability</a>
@@ -254,9 +175,54 @@ function Intro() {
           At Brandon Media Group, we capture weddings through a refined blend of
           photography and cinematic storytelling. Our approach is personal,
           intentional, and focused on preserving the moments that matter most for
-          clients in Richmond, Fredericksburg, Stafford, Arlington, Alexandria,
-          Washington DC, Northern Virginia, and throughout the DMV area.
+          couples across Virginia, Northern Virginia, Washington, DC, and the DMV.
         </p>
+      </div>
+    </section>
+  );
+}
+
+function WeddingServices() {
+  const services = [
+    {
+      title: "Wedding Videography",
+      copy: "Cinematic, story-driven films with intentional visuals and clear audio for vows, speeches, and the moments in between.",
+      href: "/wedding-videography"
+    },
+    {
+      title: "Wedding Photography",
+      copy: "Natural documentary coverage, calm portrait direction, clean color, and a private online wedding gallery.",
+      href: "/wedding-photography"
+    },
+    {
+      title: "Wedding Photo + Video",
+      copy: "One coordinated plan for couples who want both a complete photographic gallery and a cinematic wedding film.",
+      href: "/wedding-photo-video"
+    },
+    {
+      title: "Engagement Photography",
+      copy: "A relaxed portrait session with location planning, simple preparation, and direction that still feels like you.",
+      href: "/engagement-photography"
+    }
+  ];
+
+  return (
+    <section className="border-y border-white/10 bg-white/[0.03] py-20 md:py-28">
+      <div className="section-shell">
+        <div className="mb-10 max-w-3xl">
+          <p className={`text-xs font-semibold uppercase tracking-[0.26em] ${gold}`}>Wedding Services</p>
+          <h2 className="mt-4 font-serif text-4xl leading-tight text-white md:text-6xl">Choose the coverage that fits your story.</h2>
+          <p className="mt-5 text-lg leading-8 text-ivory/68">Explore focused information about each service before checking your date or requesting a recommendation.</p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {services.map((service) => (
+            <a key={service.href} href={service.href} className="group border border-white/12 bg-ink/42 p-6 transition hover:border-gold md:p-8">
+              <h3 className="font-serif text-3xl text-white md:text-4xl">{service.title}</h3>
+              <p className="mt-4 max-w-xl leading-7 text-ivory/66">{service.copy}</p>
+              <p className={`mt-6 text-xs font-semibold uppercase tracking-[0.2em] ${gold}`}>Explore Service</p>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -264,10 +230,9 @@ function Intro() {
 
 function ServiceAreas() {
   const areaLinks = [
-    ["Weddings", "#weddings"],
-    ["Portfolio", "#portfolio"],
-    ["Corporate Events", "/corporate-events"],
-    ["Real Estate", "/real-estate-media"],
+    ["Alexandria Weddings", "/alexandria-wedding-photographer-videographer"],
+    ["Northern Virginia Weddings", "/northern-virginia-wedding-photographer-videographer"],
+    ["Wedding Photo + Video", "/wedding-photo-video"],
     ["Contact", "#contact"]
   ];
 
@@ -277,13 +242,13 @@ function ServiceAreas() {
         <div>
           <p className={`text-xs font-semibold uppercase tracking-[0.26em] ${gold}`}>Service Areas</p>
           <h2 className="mt-4 font-serif text-3xl leading-tight text-white md:text-5xl">
-            Wedding, event, and real estate media across Richmond and the DMV.
+            Wedding photography and films across Virginia and the DMV.
           </h2>
         </div>
         <div>
           <p className="text-lg leading-8 text-ivory/72">
-            Serving Richmond, Fredericksburg, Northern Virginia, Washington DC,
-            Arlington, Alexandria, Stafford, and the DMV area.
+            Serving existing coverage areas that include Richmond, Fredericksburg,
+            Stafford, Alexandria, Arlington, Northern Virginia, Washington, DC, and the DMV.
           </p>
           <nav
             aria-label="Homepage service area links"
@@ -453,12 +418,14 @@ function Collections() {
 function Experience() {
   return (
     <section id="experience" className="section-shell grid gap-12 py-20 md:grid-cols-[0.9fr_1.1fr] md:items-center md:py-28">
-      <div>
-        {/* TODO: Replace this placeholder with compressed Brandon Media Group wedding work and convert final delivery images to WebP/AVIF where possible. */}
-        <img
-          src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=88"
-          alt="Natural wedding photographer and wedding videographer for Northern Virginia and Washington DC"
-          className="aspect-[4/5] w-full object-cover"
+      <div className="relative aspect-[4/5] overflow-hidden bg-white/[0.025]">
+        <Image
+          fill
+          quality={84}
+          sizes="(min-width: 768px) 45vw, 100vw"
+          src="/portfolio/recent-work/weddings/_DSC7179.jpg"
+          alt="Bride holding a white bouquet during a wedding portrait"
+          className="object-cover"
         />
       </div>
       <div>
@@ -468,8 +435,8 @@ function Experience() {
         </h2>
         <p className="mt-6 text-lg leading-8 text-ivory/70">
           Brandon Media Group is a wedding photography and film studio serving
-          couples across Richmond, Fredericksburg, Stafford, Northern Virginia,
-          Arlington, Alexandria, Washington DC, and the DMV area. The work is
+          couples across Virginia, Northern Virginia, Alexandria, Washington,
+          DC, and the DMV area. The work is
           clean, natural, and story-driven, with a focus on real emotion,
           professional audio, and a calm experience from first conversation to
           final delivery.
@@ -514,10 +481,13 @@ function Contact() {
             <p>@brandonmediagroup</p>
             <p>Serving Richmond · Fredericksburg · Northern Virginia · Washington DC · Arlington · Alexandria · Stafford · DMV area</p>
             <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2 text-[0.68rem]">
-              <a className="transition hover:text-white" href="#weddings">Weddings</a>
+              <a className="transition hover:text-white" href="/wedding-photography">Photography</a>
+              <a className="transition hover:text-white" href="/wedding-videography">Videography</a>
+              <a className="transition hover:text-white" href="/wedding-photo-video">Photo + Video</a>
+              <a className="transition hover:text-white" href="/engagement-photography">Engagements</a>
+              <a className="transition hover:text-white" href="/alexandria-wedding-photographer-videographer">Alexandria</a>
+              <a className="transition hover:text-white" href="/northern-virginia-wedding-photographer-videographer">Northern Virginia</a>
               <a className="transition hover:text-white" href="#portfolio">Portfolio</a>
-              <a className="transition hover:text-white" href="/corporate-events">Corporate Events</a>
-              <a className="transition hover:text-white" href="/real-estate-media">Real Estate</a>
               <a className="transition hover:text-white" href="#contact">Contact</a>
             </div>
           </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 
 type GalleryImage = {
@@ -12,76 +13,75 @@ const previewCount = 9;
 const weddingImages: GalleryImage[] = [
   // Add more wedding images here
   // First 9 images are shown by default. Remaining images are revealed with View More.
-  // Images should be compressed and exported as WebP/AVIF where possible to improve Core Web Vitals and local SEO.
-  { src: "/portfolio/recent-work/weddings/1000228928.JPG", alt: "Richmond VA wedding photography with natural documentary coverage by Brandon Media Group" },
-  { src: "/portfolio/recent-work/weddings/1000228930.JPG", alt: "Fredericksburg VA wedding videography detail captured in a clean cinematic style" },
-  { src: "/portfolio/recent-work/weddings/1000228931%202.JPG", alt: "Northern Virginia wedding photography portfolio with refined couple coverage" },
-  { src: "/portfolio/recent-work/weddings/1000228932.JPG", alt: "Washington DC wedding film and photography coverage with timeless color" },
-  { src: "/portfolio/recent-work/weddings/1000228933.JPG", alt: "Arlington VA wedding photography focused on candid emotional moments" },
-  { src: "/portfolio/recent-work/weddings/1000228935.JPG", alt: "Alexandria VA wedding videography and photo coverage by Brandon Media Group" },
-  { src: "/portfolio/recent-work/weddings/1000228936.JPG", alt: "Stafford VA wedding photography portfolio with clean natural storytelling" },
-  { src: "/portfolio/recent-work/weddings/1000228937.JPG", alt: "DMV area wedding photography and cinematic film coverage for modern couples" },
-  { src: "/portfolio/recent-work/weddings/1000228938.JPG", alt: "Richmond and Northern Virginia wedding portraits with polished editorial detail" },
-  { src: "/portfolio/recent-work/weddings/1000228939.JPG", alt: "Fredericksburg wedding ceremony photo and video coverage with professional audio" },
-  { src: "/portfolio/recent-work/weddings/1000228940.JPG", alt: "Washington DC wedding reception photography with warm documentary coverage" },
-  { src: "/portfolio/recent-work/weddings/1000228941.JPG", alt: "Arlington and Alexandria wedding photo gallery by Brandon Media Group" },
-  { src: "/portfolio/recent-work/weddings/1000229193.JPG", alt: "Stafford and DMV area wedding videography with cinematic highlight film style" },
-  { src: "/portfolio/recent-work/weddings/_DSC7106.jpg", alt: "Richmond VA wedding details photographed with a clean luxury finish" },
-  { src: "/portfolio/recent-work/weddings/_DSC7179.jpg", alt: "Fredericksburg VA wedding party photography with natural direction" },
-  { src: "/portfolio/recent-work/weddings/_DSC7180.jpg", alt: "Northern Virginia wedding photography capturing real candid emotion" },
-  { src: "/portfolio/recent-work/weddings/_DSC7184.jpg", alt: "Washington DC wedding videography and photography portfolio moment" },
-  { src: "/portfolio/recent-work/weddings/_DSC7212.jpg", alt: "Arlington VA wedding couple portrait with timeless Brandon Media Group editing" },
-  { src: "/portfolio/recent-work/weddings/_DSC7228.jpg", alt: "Alexandria VA wedding reception photo coverage with refined natural color" },
-  { src: "/portfolio/recent-work/weddings/_DSC7231.jpg", alt: "Stafford VA wedding photography for ceremony and reception storytelling" },
-  { src: "/portfolio/recent-work/weddings/_DSC7233.jpg", alt: "DMV area wedding film coverage with emotional story-driven visuals" },
-  { src: "/portfolio/recent-work/weddings/_DSC7239.jpg", alt: "Richmond wedding photography portfolio with elegant celebration coverage" },
-  { src: "/portfolio/recent-work/weddings/_DSC7277-2.jpg", alt: "Fredericksburg wedding videography still with polished cinematic framing" },
-  { src: "/portfolio/recent-work/weddings/_DSC7277-3.jpg", alt: "Northern Virginia wedding photographer capturing classic couple portraits" },
-  { src: "/portfolio/recent-work/weddings/_DSC7277.jpg", alt: "Washington DC wedding photography with clean documentary composition" },
-  { src: "/portfolio/recent-work/weddings/_DSC7280.jpg", alt: "Arlington VA wedding media coverage for portraits details and celebration" },
-  { src: "/portfolio/recent-work/weddings/_DSC7381.jpg", alt: "Alexandria VA wedding photography and cinematic film by Brandon Media Group" },
-  { src: "/portfolio/recent-work/weddings/_DSC7383.jpg", alt: "Stafford VA wedding photo gallery with natural candid storytelling" },
-  { src: "/portfolio/recent-work/weddings/_DSC7384.jpg", alt: "DMV area wedding photography with refined emotional coverage" },
-  { src: "/portfolio/recent-work/weddings/_DSC7385.jpg", alt: "Richmond and Washington DC wedding film coverage with timeless visual style" },
-  { src: "/portfolio/recent-work/weddings/_DSC7386.jpg", alt: "Fredericksburg and Northern Virginia wedding photography with natural editorial coverage" },
-  { src: "/portfolio/recent-work/weddings/_DSC7388.jpg", alt: "Arlington Alexandria wedding photographer capturing elegant reception moments" },
-  { src: "/portfolio/recent-work/weddings/_DSC7389.jpg", alt: "Stafford and DMV area wedding videography portfolio by Brandon Media Group" }
+  // Next/Image generates responsive AVIF/WebP variants while preserving the original gallery files.
+  { src: "/portfolio/recent-work/weddings/1000228928.JPG", alt: "Groomsmen standing together in coordinated formal wedding attire" },
+  { src: "/portfolio/recent-work/weddings/1000228930.JPG", alt: "Wedding celebration portrait from a Brandon Media Group gallery" },
+  { src: "/portfolio/recent-work/weddings/1000228931%202.JPG", alt: "Two wedding guests posing together near a floral backdrop" },
+  { src: "/portfolio/recent-work/weddings/1000228932.JPG", alt: "Wedding-day portrait with clean, natural color" },
+  { src: "/portfolio/recent-work/weddings/1000228933.JPG", alt: "Candid moment from a real wedding celebration" },
+  { src: "/portfolio/recent-work/weddings/1000228935.JPG", alt: "Groom and groomsmen gathered in formal black attire" },
+  { src: "/portfolio/recent-work/weddings/1000228936.JPG", alt: "Wedding party moment photographed by Brandon Media Group" },
+  { src: "/portfolio/recent-work/weddings/1000228937.JPG", alt: "Guest portrait from an indoor wedding celebration" },
+  { src: "/portfolio/recent-work/weddings/1000228938.JPG", alt: "Wedding celebration detail from a finished gallery" },
+  { src: "/portfolio/recent-work/weddings/1000228939.JPG", alt: "Candid wedding reception moment" },
+  { src: "/portfolio/recent-work/weddings/1000228940.JPG", alt: "Wedding guest moment during the reception" },
+  { src: "/portfolio/recent-work/weddings/1000228941.JPG", alt: "Real wedding portrait photographed indoors" },
+  { src: "/portfolio/recent-work/weddings/1000229193.JPG", alt: "Celebration moment from a Brandon Media Group wedding gallery" },
+  { src: "/portfolio/recent-work/weddings/_DSC7106.jpg", alt: "Groom adjusting his embroidered wedding attire while getting ready" },
+  { src: "/portfolio/recent-work/weddings/_DSC7179.jpg", alt: "Bride holding a white bouquet during a clean wedding portrait" },
+  { src: "/portfolio/recent-work/weddings/_DSC7180.jpg", alt: "Portrait from a real wedding day" },
+  { src: "/portfolio/recent-work/weddings/_DSC7184.jpg", alt: "Bride photographed during wedding-day preparations" },
+  { src: "/portfolio/recent-work/weddings/_DSC7212.jpg", alt: "Wedding party member photographed outdoors" },
+  { src: "/portfolio/recent-work/weddings/_DSC7228.jpg", alt: "Natural portrait from an outdoor wedding celebration" },
+  { src: "/portfolio/recent-work/weddings/_DSC7231.jpg", alt: "Wedding party portrait in a green outdoor setting" },
+  { src: "/portfolio/recent-work/weddings/_DSC7233.jpg", alt: "Two wedding party members smiling together outdoors" },
+  { src: "/portfolio/recent-work/weddings/_DSC7239.jpg", alt: "Wedding portrait photographed with a natural outdoor background" },
+  { src: "/portfolio/recent-work/weddings/_DSC7277-2.jpg", alt: "Bride smiling with her bouquet and wedding ring" },
+  { src: "/portfolio/recent-work/weddings/_DSC7277-3.jpg", alt: "Bridal portrait from a real wedding gallery" },
+  { src: "/portfolio/recent-work/weddings/_DSC7277.jpg", alt: "Bride photographed with her bouquet during the wedding day" },
+  { src: "/portfolio/recent-work/weddings/_DSC7280.jpg", alt: "Wedding-day portrait with a softly blurred background" },
+  { src: "/portfolio/recent-work/weddings/_DSC7381.jpg", alt: "Newly married couple sharing a kiss during outdoor portraits" },
+  { src: "/portfolio/recent-work/weddings/_DSC7383.jpg", alt: "Wedding couple portrait in a natural outdoor setting" },
+  { src: "/portfolio/recent-work/weddings/_DSC7384.jpg", alt: "Candid moment between a newly married couple" },
+  { src: "/portfolio/recent-work/weddings/_DSC7385.jpg", alt: "Wedding couple photographed together outdoors" },
+  { src: "/portfolio/recent-work/weddings/_DSC7386.jpg", alt: "Natural couple portrait from a wedding gallery" },
+  { src: "/portfolio/recent-work/weddings/_DSC7388.jpg", alt: "Bride and groom portrait captured after the ceremony" },
+  { src: "/portfolio/recent-work/weddings/_DSC7389.jpg", alt: "Newly married couple photographed during outdoor portraits" }
 ];
 
 const eventImages: GalleryImage[] = [
   // Add more event images here
   // First 9 images are shown by default. Remaining images are revealed with View More.
-  // Images should be compressed and exported as WebP/AVIF where possible to improve Core Web Vitals and local SEO.
-  { src: "/portfolio/recent-work/events/1000213807.JPG", alt: "Richmond VA corporate event photography with polished guest coverage" },
-  { src: "/portfolio/recent-work/events/1000213808.JPG", alt: "Fredericksburg VA corporate event video and photo coverage by Brandon Media Group" },
-  { src: "/portfolio/recent-work/events/1000213812.JPG", alt: "Northern Virginia conference photography with professional speaker coverage" },
-  { src: "/portfolio/recent-work/events/1000213814.JPG", alt: "Washington DC corporate event videography for brand and company gatherings" },
-  { src: "/portfolio/recent-work/events/1000213816.JPG", alt: "Arlington VA corporate gala photography with refined event documentation" },
-  { src: "/portfolio/recent-work/events/1000213818.JPG", alt: "Alexandria VA business event coverage with clean professional editing" },
-  { src: "/portfolio/recent-work/events/1000213822.JPG", alt: "Stafford VA event photography and recap video coverage for organizations" },
-  { src: "/portfolio/recent-work/events/_DSC6700.jpg", alt: "DMV area corporate event coverage for conferences galas and activations" },
-  { src: "/portfolio/recent-work/events/_DSC6703.jpg", alt: "Richmond corporate event photographer capturing networking and guest moments" },
-  { src: "/portfolio/recent-work/events/_DSC6705.jpg", alt: "Fredericksburg event videography and photography for professional gatherings" },
-  { src: "/portfolio/recent-work/events/_DSC6706.jpg", alt: "Northern Virginia event photo coverage with candid audience reactions" },
-  { src: "/portfolio/recent-work/events/_DSC6708.jpg", alt: "Washington DC corporate event photography for speakers and panels" },
-  { src: "/portfolio/recent-work/events/_DSC6709.jpg", alt: "Arlington VA brand activation photography and event media coverage" },
-  { src: "/portfolio/recent-work/events/_DSC6710-2.jpg", alt: "Alexandria VA corporate event recap video and polished photo gallery" },
-  { src: "/portfolio/recent-work/events/_DSC6710.jpg", alt: "Stafford VA corporate celebration photography by Brandon Media Group" },
-  { src: "/portfolio/recent-work/events/_DSC6711.jpg", alt: "DMV area event videography for company milestones and nonprofit events" },
-  { src: "/portfolio/recent-work/events/_DSC6810.jpg", alt: "Richmond event photography with clean lighting and professional coverage" },
-  { src: "/portfolio/recent-work/events/_DSC6811.jpg", alt: "Fredericksburg VA conference photography and event highlight coverage" },
-  { src: "/portfolio/recent-work/events/_DSC6893.jpg", alt: "Northern Virginia corporate media coverage for marketing and internal communications" },
-  { src: "/portfolio/recent-work/events/_DSC6925.jpg", alt: "Washington DC gala photographer capturing polished event details" },
-  { src: "/portfolio/recent-work/events/_DSC6933.jpg", alt: "Arlington VA corporate event video still for recap and social media content" },
-  { src: "/portfolio/recent-work/events/_DSC6968.jpg", alt: "Alexandria VA event photographer covering networking and audience moments" },
-  { src: "/portfolio/recent-work/events/_DSC6971.jpg", alt: "Stafford VA business event photography with reliable professional delivery" },
-  { src: "/portfolio/recent-work/events/_DSC6972.jpg", alt: "DMV area corporate event photo gallery by Brandon Media Group" },
-  { src: "/portfolio/recent-work/events/_DSC7011.jpg", alt: "Richmond VA event videography with clean storytelling for local organizations" },
-  { src: "/portfolio/recent-work/events/_DSC7012.jpg", alt: "Fredericksburg corporate gala photography with elegant event coverage" },
-  { src: "/portfolio/recent-work/events/_DSC7038.jpg", alt: "Northern Virginia event coverage for conferences panels and networking" },
-  { src: "/portfolio/recent-work/events/_DSC7056.jpg", alt: "Washington DC corporate event photographer for professional brand moments" },
-  { src: "/portfolio/recent-work/events/_DSC7062.jpg", alt: "Arlington and Alexandria event photography and recap video services" },
-  { src: "/portfolio/recent-work/events/_DSC7068.jpg", alt: "Stafford and DMV area event media portfolio by Brandon Media Group" }
+  { src: "/portfolio/recent-work/events/1000213807.JPG", alt: "Guest portrait from a professionally photographed event" },
+  { src: "/portfolio/recent-work/events/1000213808.JPG", alt: "Candid interaction between guests at an indoor event" },
+  { src: "/portfolio/recent-work/events/1000213812.JPG", alt: "Attendees gathered during a formal celebration" },
+  { src: "/portfolio/recent-work/events/1000213814.JPG", alt: "Event guest photographed in a polished indoor setting" },
+  { src: "/portfolio/recent-work/events/1000213816.JPG", alt: "Group portrait from a Brandon Media Group event gallery" },
+  { src: "/portfolio/recent-work/events/1000213818.JPG", alt: "Candid guest moment during an event" },
+  { src: "/portfolio/recent-work/events/1000213822.JPG", alt: "Event detail captured with clean color" },
+  { src: "/portfolio/recent-work/events/_DSC6700.jpg", alt: "Professional event coverage from a real gathering" },
+  { src: "/portfolio/recent-work/events/_DSC6703.jpg", alt: "Guests interacting during a photographed event" },
+  { src: "/portfolio/recent-work/events/_DSC6705.jpg", alt: "Formal event portrait from a finished gallery" },
+  { src: "/portfolio/recent-work/events/_DSC6706.jpg", alt: "Candid audience reaction captured during an event" },
+  { src: "/portfolio/recent-work/events/_DSC6708.jpg", alt: "Speaker and audience moment during an event" },
+  { src: "/portfolio/recent-work/events/_DSC6709.jpg", alt: "Brand event moment photographed by Brandon Media Group" },
+  { src: "/portfolio/recent-work/events/_DSC6710-2.jpg", alt: "Guest portrait with a softly blurred event background" },
+  { src: "/portfolio/recent-work/events/_DSC6710.jpg", alt: "Celebration moment from an event gallery" },
+  { src: "/portfolio/recent-work/events/_DSC6711.jpg", alt: "Group gathered during a professional event" },
+  { src: "/portfolio/recent-work/events/_DSC6810.jpg", alt: "Event photograph with clean lighting and color" },
+  { src: "/portfolio/recent-work/events/_DSC6811.jpg", alt: "Candid moment from a conference or gathering" },
+  { src: "/portfolio/recent-work/events/_DSC6893.jpg", alt: "Professional event moment captured for a finished gallery" },
+  { src: "/portfolio/recent-work/events/_DSC6925.jpg", alt: "Formal event detail photographed indoors" },
+  { src: "/portfolio/recent-work/events/_DSC6933.jpg", alt: "Guest interaction captured during an event" },
+  { src: "/portfolio/recent-work/events/_DSC6968.jpg", alt: "Networking moment from a real event" },
+  { src: "/portfolio/recent-work/events/_DSC6971.jpg", alt: "Business event portrait with natural expression" },
+  { src: "/portfolio/recent-work/events/_DSC6972.jpg", alt: "Candid event photograph from Brandon Media Group" },
+  { src: "/portfolio/recent-work/events/_DSC7011.jpg", alt: "Story-driven moment from an indoor event" },
+  { src: "/portfolio/recent-work/events/_DSC7012.jpg", alt: "Formal celebration photographed with clean color" },
+  { src: "/portfolio/recent-work/events/_DSC7038.jpg", alt: "Audience and speaker coverage from a professional gathering" },
+  { src: "/portfolio/recent-work/events/_DSC7056.jpg", alt: "Guest portrait during a professional event" },
+  { src: "/portfolio/recent-work/events/_DSC7062.jpg", alt: "Candid event moment from a finished gallery" },
+  { src: "/portfolio/recent-work/events/_DSC7068.jpg", alt: "Professional event photograph by Brandon Media Group" }
 ];
 
 function getMosaicClass(index: number) {
@@ -140,11 +140,13 @@ function MosaicGallery({
             key={image.src}
             className={`group relative overflow-hidden border border-white/10 bg-white/[0.025] ${getMosaicClass(index)}`}
           >
-            <img
+            <Image
+              fill
+              quality={80}
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
               src={image.src}
               alt={image.alt}
               className="h-full w-full object-cover opacity-[0.94] transition duration-700 group-hover:scale-[1.025] group-hover:opacity-100"
-              loading={index < 2 ? "eager" : "lazy"}
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent opacity-70 transition duration-500 group-hover:opacity-45" />
           </article>

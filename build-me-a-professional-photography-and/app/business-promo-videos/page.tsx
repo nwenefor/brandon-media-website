@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { ServicePage } from "@/components/service-page";
+import { createMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Business Promo Videos in Richmond and the DMV",
-  description:
-    "Clean, story-driven promotional videos for local businesses, service providers, restaurants, salons, gyms, clinics, creators, and brands in Richmond, Fredericksburg, Northern Virginia, Washington DC, and the DMV area."
-};
+export const metadata: Metadata = createMetadata({
+  title: "Business Promo Videos | Virginia & DMV",
+  description: "Clean, story-driven promotional video for local businesses, service providers, restaurants, creators, and brands across Virginia and the DMV.",
+  path: "/business-promo-videos"
+});
 
 const formFields = [
   { type: "text", name: "businessName", label: "Business Name", required: true },
