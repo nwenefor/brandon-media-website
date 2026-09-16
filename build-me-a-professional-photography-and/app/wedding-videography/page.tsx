@@ -43,5 +43,4 @@ export default function WeddingVideographyPage() {
   );
 }
 
-// CONTENT TODO: Add an approved lightweight wedding-film URL and poster for public embedding.
 // CONFIG TODO: Add an approved consultation-booking URL before rendering a consultation CTA.

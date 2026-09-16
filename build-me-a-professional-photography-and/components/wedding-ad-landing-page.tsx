@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -149,6 +149,8 @@ type WeddingAdLandingPageProps = {
 };
 
 export function WeddingAdLandingPage({ pagePath = "/wedding-videography" }: WeddingAdLandingPageProps) {
+  const filmPlayTracked = useRef(false);
+
   useEffect(() => {
     trackWeddingEvent("wedding_landing_view", { page_path: pagePath });
   }, [pagePath]);
@@ -256,36 +258,39 @@ export function WeddingAdLandingPage({ pagePath = "/wedding-videography" }: Wedd
         <div className="section-shell">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Featured wedding film</p>
-            <h2 id="featured-film-title" className="mt-4 font-serif text-4xl text-white sm:text-5xl">See the story, not a highlight reel of promises.</h2>
+            <h2 id="featured-film-title" className="mt-4 font-serif text-4xl text-white sm:text-5xl">Watch a real wedding highlight.</h2>
             <p className="mt-5 leading-7 text-ivory/65">
-              Full wedding-film previews are currently shared privately. Request a current film link and
-              tell us which parts of your own day matter most.
+              A cinematic look at the emotion, movement, and natural moments Brandon Media Group preserves
+              throughout a wedding day.
             </p>
           </div>
           <div className="mt-10 grid overflow-hidden border border-white/10 bg-charcoal lg:grid-cols-[1.4fr_0.6fr]">
-            <div className="relative aspect-video min-h-[250px]">
-              <Image
-                src="/wedding-landing/film-poster.jpg"
-                alt="Wedding couple together during an outdoor portrait session"
-                fill
-                sizes="(min-width: 1024px) 70vw, 100vw"
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-black/35" />
-              <div className="absolute inset-0 grid place-items-center">
-                <span className="grid h-20 w-20 place-items-center rounded-full border border-white/60 bg-black/35 backdrop-blur-sm" aria-hidden="true">
-                  <Film className="h-7 w-7 text-white" />
-                </span>
-              </div>
-            </div>
+            <video
+              className="aspect-video h-full w-full bg-black object-contain"
+              controls
+              playsInline
+              preload="none"
+              poster="/wedding-landing/film-poster.jpg"
+              aria-label="Featured Brandon Media Group wedding highlight film"
+              onPlay={() => {
+                if (filmPlayTracked.current) return;
+                filmPlayTracked.current = true;
+                trackWeddingEvent("watch_film_click", {
+                  placement: "featured_film_player",
+                  page_path: pagePath
+                });
+              }}
+            >
+              <source src="/wedding-landing/highlight-film.mp4" type="video/mp4" />
+              Your browser does not support embedded video. You can still request the film through the availability form.
+            </video>
             <div className="flex flex-col justify-center p-7 sm:p-10">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Private full-film preview</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Wedding highlight film</p>
               <h3 className="mt-4 font-serif text-3xl text-white">A complete wedding story</h3>
               <p className="mt-4 text-sm leading-6 text-ivory/62">Real pacing, clean audio, and the quiet moments between the milestones.</p>
-              <CheckDateLink placement="featured_film" label="Request the Film Link" className="btn-primary mt-7 w-full" />
+              <CheckDateLink placement="featured_film" className="btn-primary mt-7 w-full" />
             </div>
           </div>
-          {/* CONTENT TODO: Replace the private-preview panel with an approved, lightweight hosted wedding film and poster image. */}
         </div>
       </section>
 
