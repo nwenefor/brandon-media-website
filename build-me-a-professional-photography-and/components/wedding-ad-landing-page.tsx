@@ -66,36 +66,36 @@ const collections = [
   }
 ] as const;
 
-const portfolio = [
+const editorialGallery = [
   {
-    src: "/wedding-landing/hero.jpg",
-    alt: "Newly married couple sharing a kiss during outdoor wedding portraits",
-    label: "Couple portraits",
-    className: "sm:col-span-2 sm:row-span-2"
+    src: "/wedding-landing/editorial/bride-reception-portrait.jpg",
+    alt: "Bride seated in front of white floral wedding decor",
+    className: "sm:col-span-2 lg:col-span-7 lg:row-span-2",
+    sizes: "(min-width: 1024px) 58vw, 100vw"
   },
   {
-    src: "/wedding-landing/getting-ready.jpg",
-    alt: "Groom adjusting his wedding attire while getting ready",
-    label: "Getting ready",
-    className: ""
+    src: "/wedding-landing/editorial/bride-full-length-portrait.jpg",
+    alt: "Bride standing in her wedding gown with its train arranged around her",
+    className: "lg:col-span-5 lg:row-span-2",
+    sizes: "(min-width: 1024px) 42vw, (min-width: 640px) 50vw, 100vw"
   },
   {
-    src: "/wedding-landing/bride.jpg",
-    alt: "Bride holding a white bouquet during a natural wedding portrait",
-    label: "Bridal portrait",
-    className: ""
+    src: "/wedding-landing/editorial/wedding-celebration.jpg",
+    alt: "Wedding party gathered with the couple for a formal portrait",
+    className: "lg:col-span-5",
+    sizes: "(min-width: 1024px) 42vw, (min-width: 640px) 50vw, 100vw"
   },
   {
-    src: "/wedding-landing/wedding-party.jpg",
-    alt: "Groomsmen gathered in coordinated formal wedding attire",
-    label: "Wedding party",
-    className: ""
+    src: "/wedding-landing/editorial/bridal-veil-portrait.jpg",
+    alt: "Bride smiling over her shoulder with her veil and bouquet",
+    className: "lg:col-span-3",
+    sizes: "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
   },
   {
-    src: "/wedding-landing/details.jpg",
-    alt: "Bride smiling with her bouquet and wedding ring",
-    label: "Details",
-    className: ""
+    src: "/wedding-landing/editorial/couple-outdoor-portrait.jpg",
+    alt: "Newly married couple standing together during an outdoor wedding portrait",
+    className: "sm:col-span-2 lg:col-span-4",
+    sizes: "(min-width: 1024px) 33vw, 100vw"
   }
 ] as const;
 
@@ -400,7 +400,7 @@ export function WeddingAdLandingPage({ pagePath = "/wedding-videography" }: Wedd
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Selected wedding work</p>
-              <h2 id="portfolio-title" className="mt-4 font-serif text-4xl text-white sm:text-5xl">Moments with movement, emotion, and context.</h2>
+              <h2 id="portfolio-title" className="mt-4 font-serif text-4xl text-white sm:text-5xl">A wedding story, frame by frame.</h2>
             </div>
             <div className="grid gap-3 sm:flex">
               <PixiesetGalleryLink location="portfolio_section" className="btn-primary w-full sm:w-auto">
@@ -409,19 +409,19 @@ export function WeddingAdLandingPage({ pagePath = "/wedding-videography" }: Wedd
               <CheckDateLink placement="portfolio" className="btn-secondary w-full sm:w-auto" />
             </div>
           </div>
-          <div className="mt-10 grid auto-rows-[240px] gap-3 sm:grid-cols-2 sm:auto-rows-[270px] lg:grid-cols-4">
-            {portfolio.map((image) => (
-              <figure key={image.src} className={`group relative overflow-hidden bg-black ${image.className ?? ""}`}>
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-12 lg:auto-rows-[220px]">
+            {editorialGallery.map((image) => (
+              <figure
+                key={image.src}
+                className={`group relative min-h-[300px] overflow-hidden border border-white/10 bg-black sm:min-h-[360px] lg:min-h-0 ${image.className}`}
+              >
                 <Image
                   src={image.src}
                   alt={image.alt}
                   fill
-                  sizes={image.className ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"}
-                  className="object-cover transition duration-500 group-hover:scale-[1.025]"
+                  sizes={image.sizes}
+                  className="object-cover transition duration-700 ease-out group-hover:scale-[1.02] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
                 />
-                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-5 pb-4 pt-12 text-xs font-semibold uppercase tracking-[0.15em] text-white">
-                  {image.label}
-                </figcaption>
               </figure>
             ))}
           </div>
