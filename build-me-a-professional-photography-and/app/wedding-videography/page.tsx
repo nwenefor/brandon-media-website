@@ -38,7 +38,7 @@ export default function WeddingVideographyPage() {
   return (
     <>
       <JsonLd data={serviceSchema} />
-      <WeddingAdLandingPage />
+      <WeddingAdLandingPage pagePath={path} />
     </>
   );
 }

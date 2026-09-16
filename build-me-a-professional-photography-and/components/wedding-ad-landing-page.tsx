@@ -144,10 +144,14 @@ const faqs = [
   ["Are you insured?", "Yes. Brandon Media Group is a fully insured business."]
 ] as const;
 
-export function WeddingAdLandingPage() {
+type WeddingAdLandingPageProps = {
+  pagePath?: string;
+};
+
+export function WeddingAdLandingPage({ pagePath = "/wedding-videography" }: WeddingAdLandingPageProps) {
   useEffect(() => {
-    trackWeddingEvent("wedding_landing_view", { page_path: "/wedding-videography" });
-  }, []);
+    trackWeddingEvent("wedding_landing_view", { page_path: pagePath });
+  }, [pagePath]);
 
   return (
     <main className="overflow-x-hidden bg-ink pb-20 text-ivory lg:pb-0">
