@@ -135,7 +135,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: failureMessage }, { status: 502 });
     }
 
-    return NextResponse.json({ message: successMessage });
+    return NextResponse.json({ message: successMessage, submitted: true });
   } catch (error) {
     console.error("Zoho SMTP contact delivery failed.", safeMailError(error));
     return NextResponse.json({ message: failureMessage }, { status: 502 });

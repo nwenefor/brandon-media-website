@@ -4,7 +4,7 @@ import { FormEvent, useRef, useState } from "react";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { TrackedPrivacyLink } from "@/components/tracked-privacy-link";
 import { PixiesetGalleryLink } from "@/components/pixieset-gallery-link";
-import { trackWeddingEvent } from "@/lib/analytics";
+import { trackGoogleAdsLeadConversion, trackWeddingEvent } from "@/lib/analytics";
 
 type FormValues = {
   name: string;
@@ -64,6 +64,8 @@ export function WeddingLeadForm() {
   const [state, setState] = useState<SubmitState>("idle");
   const [serverMessage, setServerMessage] = useState("");
   const started = useRef(false);
+  const submissionInFlight = useRef(false);
+  const googleAdsConversionSent = useRef(false);
   const errorSummary = useRef<HTMLDivElement>(null);
 
   function noteFormStart() {
@@ -83,7 +85,7 @@ export function WeddingLeadForm() {
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (state === "submitting") return;
+    if (submissionInFlight.current || state === "submitting" || state === "success") return;
 
     const nextErrors = validate(values);
     setErrors(nextErrors);
@@ -95,6 +97,7 @@ export function WeddingLeadForm() {
       return;
     }
 
+    submissionInFlight.current = true;
     setState("submitting");
     setServerMessage("");
     trackWeddingEvent("form_submit", {
@@ -112,7 +115,7 @@ export function WeddingLeadForm() {
           ...values
         })
       });
-      const data = (await response.json()) as { message?: string };
+      const data = (await response.json()) as { message?: string; submitted?: boolean };
 
       if (!response.ok) throw new Error(data.message || "We could not send your inquiry.");
 
@@ -121,7 +124,12 @@ export function WeddingLeadForm() {
         form_name: "wedding_date_inquiry",
         conversion_type: "wedding_lead"
       });
+      if (data.submitted === true && !googleAdsConversionSent.current) {
+        googleAdsConversionSent.current = true;
+        trackGoogleAdsLeadConversion();
+      }
     } catch (error) {
+      submissionInFlight.current = false;
       setState("error");
       setServerMessage(
         error instanceof Error
