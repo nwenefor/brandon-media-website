@@ -10,6 +10,9 @@ export const business = {
   logo: "/brand/bmg_minimal_mark.svg"
 } as const;
 
+// Public sitewide destination only. Conversion labels are intentionally not configured here.
+export const googleAdsId = "AW-18461056217";
+
 export const primaryWeddingRoutes = [
   "/wedding-videography",
   "/wedding-photography",
