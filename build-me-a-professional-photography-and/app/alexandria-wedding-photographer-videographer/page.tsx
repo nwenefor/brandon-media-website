@@ -71,7 +71,7 @@ export default function AlexandriaWeddingPage() {
       ]}
       investmentTitle="Alexandria wedding coverage and delivery"
       investmentCopy="Current wedding guidance on the site places most couples between $1,500 and $2,600, depending on coverage needs. The exact Alexandria quote depends on the date, schedule, locations, hours, and whether you choose photography, film, or both."
-      timingCopy="The current published delivery windows are 4–6 weeks for wedding photographs and 6–8 weeks for wedding films."
+      timingCopy="The current published delivery windows are 4–6 weeks for wedding photographs and 10–14 business days for wedding films."
       faqs={[
         { question: "Do you provide both wedding photography and videography in Alexandria?", answer: "Yes. Brandon Media Group offers photography-only, cinematic video-only, and combined wedding coverage in Alexandria, subject to date availability." },
         { question: "Have you worked at our Alexandria venue?", answer: "The current public project records do not verify specific Alexandria venues, so none are claimed on this page. Share your venue during inquiry and Brandon Media Group can answer directly and plan around its actual rules and layout." },

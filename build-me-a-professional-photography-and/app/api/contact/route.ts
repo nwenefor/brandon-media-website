@@ -19,7 +19,7 @@ type ContactPayload = {
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const failureMessage =
-  "We could not send your inquiry right now. Please email brandonmediagroupllc@gmail.com directly.";
+  "We could not send your inquiry right now. Please email info@brandonmediagroup.com directly.";
 const validationMessage = "Please complete the required contact and project details.";
 const successMessage = "Thank you. We will review your inquiry and follow up shortly.";
 const rateLimitMessage = "Too many requests. Please try again later.";

@@ -71,7 +71,7 @@ export default function NorthernVirginiaWeddingPage() {
       ]}
       investmentTitle="Northern Virginia wedding coverage and delivery"
       investmentCopy="Current wedding guidance on the site places most couples between $1,500 and $2,600, depending on coverage needs. Exact pricing depends on the date, schedule, locations, hours, and whether the collection includes photography, film, or both."
-      timingCopy="The current published delivery windows are 4–6 weeks for wedding photographs and 6–8 weeks for wedding films."
+      timingCopy="The current published delivery windows are 4–6 weeks for wedding photographs and 10–14 business days for wedding films."
       faqs={[
         { question: "What parts of Northern Virginia do you serve?", answer: "Northern Virginia is an existing service area for Brandon Media Group, with Alexandria, Arlington, and Stafford also named in the current site content. Availability for your exact date and location is confirmed through inquiry." },
         { question: "Can our wedding include locations in Northern Virginia and Washington, DC?", answer: "It can when the selected coverage and timeline reasonably allow. Share every address, hard start time, and expected travel window so the quote and plan reflect the real schedule." },

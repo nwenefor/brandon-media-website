@@ -70,13 +70,13 @@ export default function WeddingPhotoVideoPage() {
       ]}
       investmentTitle="Combined wedding coverage and delivery"
       investmentCopy="Current wedding guidance on the site places most couples between $1,500 and $2,600, depending on coverage needs. A precise photo-and-video quote is prepared after the date, location, hours, and requested film and gallery deliverables are known."
-      timingCopy="The current published delivery windows are 4–6 weeks for photographs and 6–8 weeks for wedding films."
+      timingCopy="The current published delivery windows are 4–6 weeks for photographs and 10–14 business days for wedding films."
       faqs={[
         { question: "Why book wedding photography and videography together?", answer: "A combined booking creates one planning path for the timeline and coverage priorities. It may reduce the coordination you need to handle while still giving photographs and film distinct roles." },
         { question: "Can we customize what photo and video include?", answer: "Coverage and enhancements can be discussed around your timeline and delivery needs. Exact inclusions are confirmed in the service agreement." },
         { question: "Will photo and video both cover the ceremony?", answer: "Ceremony coverage is part of the current wedding offering, but the exact photo, film, and audio plan depends on the collection you select." },
         { question: "Can we add social media clips or a documentary edit?", answer: "Yes. Social media highlight clips and a full documentary edit are listed among the current wedding enhancements." },
-        { question: "How long does delivery take?", answer: "The current delivery windows are 4–6 weeks for wedding photographs and 6–8 weeks for wedding films." },
+        { question: "How long does delivery take?", answer: "The current delivery windows are 4–6 weeks for wedding photographs and 10–14 business days for wedding films." },
         { question: "Can we book only one service instead?", answer: "Yes. Brandon Media Group also offers photography-only and cinematic video-only coverage." }
       ]}
       relatedTitle="Explore each part of the wedding experience"

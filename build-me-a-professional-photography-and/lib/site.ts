@@ -3,7 +3,7 @@ export const siteUrl = "https://www.brandonmediagroup.com";
 export const business = {
   name: "Brandon Media Group LLC",
   displayName: "Brandon Media Group",
-  email: "brandonmediagroupllc@gmail.com",
+  email: "info@brandonmediagroup.com",
   phoneDisplay: "540-214-7725",
   phoneInternational: "+1-540-214-7725",
   instagram: "https://www.instagram.com/brandonmediagroup/",

@@ -13,9 +13,6 @@ type FormValues = {
   weddingDate: string;
   location: string;
   interestedIn: string;
-  coverageNeeded: string;
-  estimatedBudget: string;
-  message: string;
   companyWebsite: string;
 };
 
@@ -29,17 +26,12 @@ const initialValues: FormValues = {
   weddingDate: "",
   location: "",
   interestedIn: "",
-  coverageNeeded: "",
-  estimatedBudget: "",
-  message: "",
   companyWebsite: ""
 };
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-const interestOptions = ["Photography", "Videography", "Both"] as const;
-const coverageOptions = ["4–6 hours", "6–8 hours", "8–10 hours", "10+ hours"] as const;
-const budgetOptions = ["$1,500–$2,000", "$2,000–$2,600", "$2,600–$4,000", "$4,000+"] as const;
+const interestOptions = ["Photography", "Videography", "Photography + Videography"] as const;
 
 function validate(values: FormValues): FormErrors {
   const errors: FormErrors = {};
@@ -50,9 +42,6 @@ function validate(values: FormValues): FormErrors {
   if (!values.weddingDate) errors.weddingDate = "Choose your wedding date.";
   if (values.location.trim().length < 2) errors.location = "Enter your venue or city.";
   if (!values.interestedIn) errors.interestedIn = "Select the service you need.";
-  if (!values.coverageNeeded) errors.coverageNeeded = "Select an approximate coverage length.";
-  if (!values.estimatedBudget) errors.estimatedBudget = "Select an approximate budget.";
-  if (values.message.length > 2000) errors.message = "Keep your message under 2,000 characters.";
 
   return errors;
 }
@@ -102,8 +91,7 @@ export function WeddingLeadForm() {
     setServerMessage("");
     trackWeddingEvent("form_submit", {
       form_name: "wedding_date_inquiry",
-      interested_in: values.interestedIn,
-      coverage: values.coverageNeeded
+      interested_in: values.interestedIn
     });
 
     try {
@@ -111,7 +99,7 @@ export function WeddingLeadForm() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          projectType: "Wedding Videography Landing Page",
+          projectType: "Wedding Photography + Videography Landing Page",
           ...values
         })
       });
@@ -120,11 +108,13 @@ export function WeddingLeadForm() {
       if (!response.ok) throw new Error(data.message || "We could not send your inquiry.");
 
       setState("success");
+      if (data.submitted !== true) return;
+
       trackWeddingEvent("form_success", {
         form_name: "wedding_date_inquiry",
         conversion_type: "wedding_lead"
       });
-      if (data.submitted === true && !googleAdsConversionSent.current) {
+      if (!googleAdsConversionSent.current) {
         googleAdsConversionSent.current = true;
         trackGoogleAdsLeadConversion();
       }
@@ -144,10 +134,9 @@ export function WeddingLeadForm() {
     return (
       <div className="border border-gold/40 bg-gold/[0.08] p-6 sm:p-8" role="status" aria-live="polite">
         <CheckCircle2 className="h-9 w-9 text-gold" aria-hidden="true" />
-        <h3 className="mt-5 font-serif text-3xl text-white">Thanks — we’re checking your date.</h3>
+        <h3 className="mt-5 font-serif text-3xl text-white">Thank you — we received your wedding inquiry.</h3>
         <p className="mt-4 max-w-xl leading-7 text-ivory/72">
-          Your inquiry was received. While we review it, explore recent wedding work and the collection
-          comparison below. Wedding collections begin at $1,500.
+          We&apos;ll review your date and details and get back to you shortly.
         </p>
         <PixiesetGalleryLink location="form_success" className="btn-primary mt-7 w-full sm:w-auto">
           View More Wedding Work <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -165,9 +154,6 @@ export function WeddingLeadForm() {
       </div>
     );
   }
-
-  const inputClass =
-    "min-h-[3.25rem] w-full rounded-none border border-white/15 bg-white/[0.045] px-4 text-base text-white outline-none transition placeholder:text-ivory/35 focus:border-gold";
 
   return (
     <form onSubmit={onSubmit} onFocusCapture={noteFormStart} noValidate className="grid gap-5">
@@ -187,30 +173,9 @@ export function WeddingLeadForm() {
         <TextField label="Wedding date" name="weddingDate" type="date" value={values.weddingDate} error={errors.weddingDate} onChange={updateValue} />
       </div>
 
-      <TextField label="Venue or city" name="location" value={values.location} error={errors.location} autoComplete="street-address" placeholder="Venue name or city" onChange={updateValue} />
+      <TextField label="Wedding location / venue" name="location" value={values.location} error={errors.location} autoComplete="street-address" placeholder="Venue name or city" onChange={updateValue} />
 
-      <div className="grid gap-5 sm:grid-cols-3">
-        <SelectField label="Interested in" name="interestedIn" value={values.interestedIn} options={interestOptions} error={errors.interestedIn} onChange={updateValue} />
-        <SelectField label="Approximate coverage" name="coverageNeeded" value={values.coverageNeeded} options={coverageOptions} error={errors.coverageNeeded} onChange={updateValue} />
-        <SelectField label="Budget range" name="estimatedBudget" value={values.estimatedBudget} options={budgetOptions} error={errors.estimatedBudget} onChange={updateValue} />
-      </div>
-
-      <label className="grid gap-2 text-sm text-ivory/75" htmlFor="message">
-        Message <span className="text-ivory/45">(optional)</span>
-        <textarea
-          id="message"
-          name="message"
-          rows={4}
-          maxLength={2000}
-          value={values.message}
-          onChange={(event) => updateValue("message", event.target.value)}
-          placeholder="Anything helpful about your plans or priorities"
-          className={`${inputClass} min-h-28 resize-y py-3`}
-          aria-invalid={Boolean(errors.message)}
-          aria-describedby={errors.message ? "message-error" : undefined}
-        />
-        {errors.message ? <span id="message-error" className="text-sm text-red-200">{errors.message}</span> : null}
-      </label>
+      <SelectField label="What do you need?" name="interestedIn" value={values.interestedIn} options={interestOptions} error={errors.interestedIn} onChange={updateValue} />
 
       <div className="absolute -left-[10000px]" aria-hidden="true">
         <label htmlFor="companyWebsite">Leave this field empty</label>
@@ -229,7 +194,7 @@ export function WeddingLeadForm() {
         disabled={state === "submitting"}
         className="btn-primary min-h-14 w-full disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {state === "submitting" ? "Checking Your Date…" : "Check Your Date"}
+        {state === "submitting" ? "Checking Your Date…" : "Check My Date"}
       </button>
       <p className="text-center text-xs leading-5 text-ivory/48">
         By submitting this form, you agree that Brandon Media Group may use the information provided
